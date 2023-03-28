@@ -7,7 +7,8 @@ object LCD {
         private const val LINES = 2
         private const val COLS = 16; // Dimensão do display.
         private const val CLEAR_DISPLAY = 0x01
-        private var enable = false
+        private const val MASK_ENABLE = 0x05
+        private const val MASK_RS = 0x04
 
         //Temporizações
         private const val Tas = 40*E-6//Address Setup Time
@@ -18,14 +19,13 @@ object LCD {
         // Escreve um nibble de comando/dados no LCD em paralelo
         private fun writeNibbleParallel(rs: Boolean, data: Int) { //Função tem de estar de acordo com as temporizações
                 if (rs){
-                        Thread.sleep(Tas.toLong()) //Adress Setup Time
-                        enable = true
-                        UsbPort.write(data)
-                        Thread.sleep(Tds.toLong()) // Data Setup Time
-                        enable = false
-                        Thread.sleep(Th.toLong())
+                        HAL.setBits(MASK_RS)
+                        HAL.setBits(MASK_ENABLE)
+                        HAL.setBits(data)
+                        HAL.setBits(MASK_ENABLE)
+                        Thread.sleep(1)
                 }
-                Thread.sleep(Tc.toLong())  //Obrigatório esperar 500ns para se inserir novamente data
+                Thread.sleep(1)  //Obrigatório esperar 500ns para se inserir novamente data
         }
         // Escreve um nibble de comando/dados no LCD em série
         private fun writeNibbleSerial(rs: Boolean, data: Int) {
@@ -33,15 +33,15 @@ object LCD {
         }
         // Escreve um nibble de comando/dados no LCD
         private fun writeNibble(rs: Boolean, data: Int) { //Esta função seleciona qual o writeNibble a usar
-                val higherBitsMask = 0xF0
-                val dataBits = data or higherBitsMask
-                if (modeParallel) writeNibbleParallel(rs, dataBits)
+                if (modeParallel) writeNibbleParallel(rs, data)
                 writeNibbleSerial(rs, data)
         }
         // Escreve um byte de comando/dados no LCD
         private fun writeByte(rs: Boolean, data: Int) {
                 //Primeiro tem que se escrever os da parte alta
-                writeNibble(true, data)
+                val upperBits = (data and 0xF0) shr 4
+                writeNibble(rs, upperBits)
+                writeNibble(rs, data and 0x0F)
         }
         // Escreve um comando no LCD
         private fun writeCMD(data: Int) {
@@ -58,14 +58,15 @@ object LCD {
                 //WAIT TIME
 
                 //Function set
-                val functionSetBits = 0x30
-                writeCMD(functionSetBits)
+                val functionSetBits = 0x3
+                writeNibble(false, functionSetBits)
                 Thread.sleep(5) //Wait for more than 4.1 sec
-                writeCMD(functionSetBits)
+                writeNibble(false, functionSetBits)
                 Thread.sleep(1)
 
-                writeCMD(0x20) //Fnction Set
-                writeCMD(0x80)  //Function Set
+                writeNibble(false, functionSetBits) //Function Set
+                writeNibble(false, 0x20) //Function Set
+
                 writeCMD(0x28)  //Function Set
                 writeCMD(0x08)   //Display off
                 writeCMD(0x01)  //Display Clear
@@ -80,21 +81,19 @@ object LCD {
         }
         // Escreve uma string na posição corrente.
         fun write(text: String) {      //Para escrever String, tem de escrever char a char
-                //for (i in text) write(i)
                 text.forEach { write(it) }
         }
 
         // Envia comando para posicionar cursor (‘line’:0..LINES-1 , ‘column’:0..COLS-1)
         fun cursor(line: Int, column: Int) {
-                /*Set
-                DDRAM
-                address*/
-                //writeCMD(0x80 or (line*0x40 + column))
+                if (line !in 0 until LINES || column !in 0 until COLS)
+                        throw IllegalArgumentException("Invalid line or column")
+                /*Set DDRAM address*/
+                writeCMD(0x80 or (line*0x40 + column)) //linha(0 ou 1) * 0x40 e soma a coluna
         }
         // Envia comando para limpar o ecrã e posicionar o cursor em (0,0)
         fun clear() {
-                writeByte(false, CLEAR_DISPLAY)
-                cursor(0x00,0x00)
+                writeCMD(CLEAR_DISPLAY)
         }
 
 }

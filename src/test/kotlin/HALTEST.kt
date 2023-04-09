@@ -8,9 +8,9 @@ class HALTEST {
     fun `Test isBit`(){
         HAL.init()
         while (true){
-            val key = HAL.isBit(0x20)
+            val key = HAL.isBit(0x02)
             if (key) break//println("Key: $key")
-            Thread.sleep(100)
+            Thread.sleep(100000)
             assertTrue(key)
         }
     }

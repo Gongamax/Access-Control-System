@@ -7,8 +7,8 @@ object LCD {
         private const val LINES = 2
         private const val COLS = 16; // Dimensão do display.
         private const val CLEAR_DISPLAY = 0x01
-        private const val MASK_ENABLE = 0x05
-        private const val MASK_RS = 0x04
+        private const val MASK_ENABLE = 0x20
+        private const val MASK_RS = 0x10
 
         //Temporizações
         private const val Tas = 40*E-6//Address Setup Time
@@ -18,13 +18,14 @@ object LCD {
 
         // Escreve um nibble de comando/dados no LCD em paralelo
         private fun writeNibbleParallel(rs: Boolean, data: Int) { //Função tem de estar de acordo com as temporizações
-                if (rs){
-                        HAL.setBits(MASK_RS)
+                if (rs) HAL.setBits(MASK_RS)
+                else    HAL.clrBits(MASK_RS)
+
                         HAL.setBits(MASK_ENABLE)
-                        HAL.setBits(data)
-                        HAL.setBits(MASK_ENABLE)
+                        HAL.writeBits(0x0F, data)
+                        HAL.clrBits(MASK_ENABLE)
                         Thread.sleep(1)
-                }
+
                 Thread.sleep(1)  //Obrigatório esperar 500ns para se inserir novamente data
         }
         // Escreve um nibble de comando/dados no LCD em série
@@ -34,7 +35,7 @@ object LCD {
         // Escreve um nibble de comando/dados no LCD
         private fun writeNibble(rs: Boolean, data: Int) { //Esta função seleciona qual o writeNibble a usar
                 if (modeParallel) writeNibbleParallel(rs, data)
-                writeNibbleSerial(rs, data)
+                else writeNibbleSerial(rs, data)
         }
         // Escreve um byte de comando/dados no LCD
         private fun writeByte(rs: Boolean, data: Int) {
@@ -58,19 +59,20 @@ object LCD {
                 //WAIT TIME
 
                 //Function set
-                val functionSetBits = 0x3
+                val functionSetBits = 0x03
                 writeNibble(false, functionSetBits)
                 Thread.sleep(5) //Wait for more than 4.1 sec
                 writeNibble(false, functionSetBits)
                 Thread.sleep(1)
 
                 writeNibble(false, functionSetBits) //Function Set
-                writeNibble(false, 0x20) //Function Set
+                writeNibble(false, 0x02) //Function Set
 
-                writeCMD(0x28)  //Function Set
+                writeCMD(0x08)  //Function Set
                 writeCMD(0x08)   //Display off
                 writeCMD(0x01)  //Display Clear
                 writeCMD(0x06)  //EntryModeSet
+                writeCMD(0x0F) //Display on
 
         }
         // Escreve um caráter na posição corrente.
@@ -96,4 +98,12 @@ object LCD {
                 writeCMD(CLEAR_DISPLAY)
         }
 
+}
+
+fun main(){
+        LCD.init()
+        LCD.write("Hello")
+        LCD.cursor(1, 5)
+        LCD.write("World!")
+        Thread.sleep(10000)
 }

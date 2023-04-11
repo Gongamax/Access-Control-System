@@ -1,5 +1,6 @@
-import isel.leic.UsbPort
 import kotlin.math.E
+import SerialEmmiter.Destination.LCD
+import SerialEmmiter.send
 
 // Escreve no LCD usando a interface a 4 bits.
 object LCD {
@@ -30,7 +31,8 @@ object LCD {
         }
         // Escreve um nibble de comando/dados no LCD em série
         private fun writeNibbleSerial(rs: Boolean, data: Int) {
-                //Não fazer, pelo menos para já só mais à frente
+                if (rs) send(LCD,0x10000 + data)  //rs será o bit de maior peso nos 5 bits de parametro
+                else    send(LCD,0x00000 + data)
         }
         // Escreve um nibble de comando/dados no LCD
         private fun writeNibble(rs: Boolean, data: Int) { //Esta função seleciona qual o writeNibble a usar
@@ -97,13 +99,4 @@ object LCD {
         fun clear() {
                 writeCMD(CLEAR_DISPLAY)
         }
-
-}
-
-fun main(){
-        LCD.init()
-        LCD.write("Hello")
-        LCD.cursor(1, 5)
-        LCD.write("World!")
-        Thread.sleep(10000)
 }

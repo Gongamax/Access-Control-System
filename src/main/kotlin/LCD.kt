@@ -1,5 +1,6 @@
+import LCD.init
 import kotlin.math.E
-import SerialEmmiter.Destination.LCD
+import SerialEmmiter.Destination.*
 import SerialEmmiter.send
 
 // Escreve no LCD usando a interface a 4 bits.
@@ -25,14 +26,14 @@ object LCD {
                         HAL.setBits(MASK_ENABLE)
                         HAL.writeBits(0x0F, data)
                         HAL.clrBits(MASK_ENABLE)
-                        Thread.sleep(1)
+
 
                 Thread.sleep(1)  //Obrigatório esperar 500ns para se inserir novamente data
         }
         // Escreve um nibble de comando/dados no LCD em série
         private fun writeNibbleSerial(rs: Boolean, data: Int) {
-                if (rs) send(LCD,0x10000 + data)  //rs será o bit de maior peso nos 5 bits de parametro
-                else    send(LCD,0x00000 + data)
+                if (rs) send(SerialEmmiter.Destination.LCD,0x10000 + data)  //rs será o bit de maior peso nos 5 bits de parametro
+                else    send(SerialEmmiter.Destination.LCD,0x00000 + data)
         }
         // Escreve um nibble de comando/dados no LCD
         private fun writeNibble(rs: Boolean, data: Int) { //Esta função seleciona qual o writeNibble a usar
@@ -99,4 +100,11 @@ object LCD {
         fun clear() {
                 writeCMD(CLEAR_DISPLAY)
         }
+}
+
+fun main() {
+        init()
+        LCD.write("Hello World!")
+        LCD.cursor(1, 0)
+        LCD.write("Hello World!")
 }

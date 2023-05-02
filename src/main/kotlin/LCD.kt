@@ -27,13 +27,12 @@ object LCD {
                         HAL.writeBits(0x0F, data)
                         HAL.clrBits(MASK_ENABLE)
 
-
                 Thread.sleep(1)  //Obrigatório esperar 500ns para se inserir novamente data
         }
         // Escreve um nibble de comando/dados no LCD em série
         private fun writeNibbleSerial(rs: Boolean, data: Int) {
-                if (rs) send(SerialEmmiter.Destination.LCD,0x10000 + data)  //rs será o bit de maior peso nos 5 bits de parametro
-                else    send(SerialEmmiter.Destination.LCD,0x00000 + data)
+                if (rs) send(SerialEmmiter.Destination.LCD,(data shl 1) or 0x01)  //rs será o bit de maior peso nos 5 bits de parametro
+                else    send(SerialEmmiter.Destination.LCD,data shl 1)
         }
         // Escreve um nibble de comando/dados no LCD
         private fun writeNibble(rs: Boolean, data: Int) { //Esta função seleciona qual o writeNibble a usar

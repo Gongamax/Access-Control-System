@@ -1,14 +1,13 @@
-import HAL
-import HAL.clrBits
 import HAL.setBits
-import HAL.writeBits
 
 //Os valores nas constantes não estão corretos, são apenas para testar
-const val ACCEPT_ADDR = 0x01
-const val SDCLK = 0x02
-const val DATA = 0x04
-const val nSS = 0x08
-const val SERIAL_ADDR = 0x10
+const val nSS_DOOR = 0x08
+const val SDXCLK = 0x04
+const val SDX = 0x02
+const val nSS_LCD = 0x01
+
+
+const val ack = 0x80
 const val DOOR_ADDR = 0x20
 
 // Envia tramas para os diferentes módulos Serial Receiver.
@@ -17,24 +16,36 @@ object SerialEmmiter {
     // Inicia a classe
     fun init() {
         HAL.init() // Iniciar a classe HAL
-        HAL.clrBits(nSS)// ATIVAR O SS A 1 (active low)
-        clrBits(SDCLK) // ATIVAR O CLK
-        clrBits(DATA)  // ATIVAR O DATA
+        HAL.clrBits(nSS_LCD)// ATIVAR O SS A 1 (active low)
+        HAL.clrBits(SDXCLK) // ATIVAR O CLK
+        setBits(SDX)  // ATIVAR O DATA
 
     }
     // Envia uma trama para o SerialReceiver identificado o destino em addr e os bits de dados em ‘data’.
     fun send(addr: Destination, data: Int) {
-        if (addr == Destination.LCD) HAL.clrBits(SERIAL_ADDR) else HAL.clrBits(DOOR_ADDR) // Alterar o sinal LCDsel
-        repeat(5) {//Iterar 5 vezes sobre os bits de data
+        // Alterar o sinal LCDsel
+        if (addr == Destination.LCD) HAL.clrBits(nSS_LCD) else HAL.clrBits(DOOR_ADDR)
+        repeat(5) {
+            println(it)//Iterar 5 vezes sobre os bits de data
             val bit = data and (1 shl it) // Obter o bit de data
-            if (bit != 0) setBits(bit) else HAL.clrBits(bit) // Escrever o bit de data
-            setBits(SDCLK) // ATIVAR O CLK
+            if (bit != 0) setBits(SDX) else HAL.clrBits(SDX) // Escrever o bit de data
+            setBits(SDXCLK) // ATIVAR O CLK
             Thread.sleep(1000)
-            HAL.clrBits(SDCLK) // DESATIVAR O CLK
+            HAL.clrBits(SDXCLK) // DESATIVAR O CLK
             Thread.sleep(1000)
+
         }
+        if (addr == Destination.LCD) HAL.setBits(nSS_LCD) else HAL.setBits(DOOR_ADDR)
     }
 
     // Retorna true se o canal série estiver ocupado
-    fun isBusy(): Boolean = !HAL.isBit(ACCEPT_ADDR) // Se o accept for 0 então está ocupado
+    fun isBusy(): Boolean = TODO() //!HAL.isBit(ACCEPT_ADDR) // Se o accept for 0 então está ocupado
+}
+
+fun main(){
+    SerialEmmiter.init()
+
+    SerialEmmiter.send(SerialEmmiter.Destination.LCD,0x02)
+    Thread.sleep(2000)
+    SerialEmmiter.send(SerialEmmiter.Destination.LCD,0x05)
 }

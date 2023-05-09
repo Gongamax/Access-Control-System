@@ -17,3 +17,11 @@ object DoorMechanism { // Controla o estado do mecanismo de abertura da porta.
     // Verifica se o comando anterior está concluído
     fun finished() : Boolean = !isBusy()
 }
+
+fun main(){
+    DoorMechanism.init()
+    DoorMechanism.close(0x02)
+    while (!DoorMechanism.finished()){
+        Thread.sleep(1)
+    }
+}

@@ -6,9 +6,9 @@ const val SDXCLK = 0x04
 const val SDX = 0x02
 const val nSS_LCD = 0x01
 
-
+const val Busy_Addr = 0x20
 const val ack = 0x80
-const val DOOR_ADDR = 0x20
+const val DOOR_ADDR = 0x08
 
 // Envia tramas para os diferentes módulos Serial Receiver.
 object SerialEmmiter {
@@ -26,7 +26,7 @@ object SerialEmmiter {
         // Alterar o sinal LCDsel
         if (addr == Destination.LCD) HAL.clrBits(nSS_LCD) else HAL.clrBits(DOOR_ADDR)
         repeat(5) {
-            println(it)//Iterar 5 vezes sobre os bits de data
+            //println(it)//Iterar 5 vezes sobre os bits de data
             val bit = data and (1 shl it) // Obter o bit de data
             if (bit != 0) setBits(SDX) else HAL.clrBits(SDX) // Escrever o bit de data
             setBits(SDXCLK) // ATIVAR O CLK
@@ -39,7 +39,7 @@ object SerialEmmiter {
     }
 
     // Retorna true se o canal série estiver ocupado
-    fun isBusy(): Boolean = TODO() //!HAL.isBit(ACCEPT_ADDR) // Se o accept for 0 então está ocupado
+    fun isBusy(): Boolean = HAL.isBit(Busy_Addr) // Se o accept for 0 então está ocupado
 }
 
 fun main(){

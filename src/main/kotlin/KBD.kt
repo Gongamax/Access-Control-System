@@ -21,7 +21,6 @@ object KBD { // Ler teclas. Métodos retornam ‘0’..’9’,’#’,’*’ o
         val kVal = isBit(DVAL) //0x10
         if (kVal){
             val key = readBits(K0_3_BITS)
-            println(key)
             setBits(ACK)  //Transição do ack para 1
             lastKey = decoderArray[key]
 
@@ -50,7 +49,7 @@ fun main(){
     KBD.init()
     while (true){
         val key = KBD.getKey()
-        if (key != KBD.NONE) println("Key: $key")
+        if (key != KBD.NONE) print("$key")
         Thread.sleep(100)
     }
 }

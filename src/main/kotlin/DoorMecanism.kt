@@ -6,6 +6,7 @@ object DoorMechanism { // Controla o estado do mecanismo de abertura da porta.
     fun init() {
         SerialEmmiter.init()
     }
+
     // Envia comando para abrir a porta, com o parâmetro de velocidade
     fun open(velocity: Int) =
         SerialEmmiter.send(DOOR, (velocity shl 1) or 0x01)
@@ -15,13 +16,13 @@ object DoorMechanism { // Controla o estado do mecanismo de abertura da porta.
         SerialEmmiter.send(DOOR, (velocity shl 1))
 
     // Verifica se o comando anterior está concluído
-    fun finished() : Boolean = !isBusy()
+    fun finished(): Boolean = !isBusy()
 }
 
-fun main(){
+fun main() {
     DoorMechanism.init()
-    DoorMechanism.close(0x02)
-    while (!DoorMechanism.finished()){
+    DoorMechanism.open(0x02)
+    while (!DoorMechanism.finished()) {
         Thread.sleep(1)
     }
 }

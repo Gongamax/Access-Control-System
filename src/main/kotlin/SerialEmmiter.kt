@@ -16,7 +16,7 @@ object SerialEmmiter {
     // Inicia a classe
     fun init() {
         HAL.init() // Iniciar a classe HAL
-        HAL.clrBits(nSS_LCD)// ATIVAR O SS A 1 (active low)
+        setBits(nSS_LCD)// ATIVAR O SS A 1 (active low)
         HAL.clrBits(SDXCLK) // ATIVAR O CLK
         setBits(SDX)  // ATIVAR O DATA
 
@@ -30,9 +30,9 @@ object SerialEmmiter {
             val bit = data and (1 shl it) // Obter o bit de data
             if (bit != 0) setBits(SDX) else HAL.clrBits(SDX) // Escrever o bit de data
             setBits(SDXCLK) // ATIVAR O CLK
-            Thread.sleep(1000)
+            //Thread.sleep(1000)
             HAL.clrBits(SDXCLK) // DESATIVAR O CLK
-            Thread.sleep(1000)
+            //Thread.sleep(1000)
 
         }
         if (addr == Destination.LCD) HAL.setBits(nSS_LCD) else HAL.setBits(DOOR_ADDR)

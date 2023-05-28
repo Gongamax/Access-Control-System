@@ -61,10 +61,10 @@ dl.done -> srl.accept
 # SDC
 # --------------------------------------
 # Serial Receiver
-UsbPort.O1 -> srd./SS
-UsbPort.O3 -> srd.SDX
-UsbPort.O4-> srd.SCLK
-srd.busy -> UsbPort.I6
+UsbPort.O3 -> srd./SS
+UsbPort.O1 -> srd.SDX
+UsbPort.O2 -> srd.SCLK
+srd.busy -> UsbPort.I5
 srd.DXval -> dc.Dval
 srd.D[0-4] -> dc.I[0-4]
 

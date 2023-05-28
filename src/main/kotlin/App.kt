@@ -4,28 +4,38 @@ import java.util.*
 object App {
 
     private val HARDCODED_USER = User("000", "John Johnson", "1234", "Johnson machine is ready")
-    private val DOOR_VELOCITY = 0x02
+    private const val DOOR_VELOCITY = 0x02
 
     fun init() {
         TUI.init()
         DoorMechanism.init()
+        DoorMechanism.close(DOOR_VELOCITY)
     }
 
     fun use() {
-        val formatDate = SimpleDateFormat("dd/MM/yyyy HH:mm")
-        val calendar = Calendar.getInstance()
-        val currDate = formatDate.format(calendar.time)
-        TUI.writeString(currDate, 0)
-        val uin = TUI.writeAndReadString("UIN:", 3, 1)
-        Thread.sleep(500)
-        val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
-        Thread.sleep(500)
-        if (authenticateUser(uin, pin)) {
-            afterLogin()
-            doorProcess()
-        } else {
-            TUI.writeString("Login Failed", 1, center = true)
-            Thread.sleep(3000)
+        while (true) {
+            TUI.clearLCD()
+            val formatDate = SimpleDateFormat("dd/MM/yyyy HH:mm")
+            val calendar = Calendar.getInstance()
+            val currDate = formatDate.format(calendar.time)
+            TUI.writeString(currDate, 0)
+            val uin = TUI.writeAndReadString("UIN:", 3, 1)
+            if (uin == TUI.TIMEOUT) use()
+            Thread.sleep(500)
+            val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
+            if (pin == TUI.TIMEOUT) {
+                TUI.writeString("Login Failed", 1, center = true)
+                Thread.sleep(3000)
+                use()
+            }
+            Thread.sleep(500)
+            if (authenticateUser(uin, pin)) {
+                afterLogin()
+                doorProcess()
+            } else {
+                TUI.writeString("Login Failed", 1, center = true)
+                Thread.sleep(3000)
+            }
         }
     }
 
@@ -53,19 +63,18 @@ object App {
             Thread.sleep(1)
         }
         TUI.writeString("Door Open", 1, center = true)
+        Thread.sleep(5000)
         DoorMechanism.close(DOOR_VELOCITY)
         TUI.writeString("Door Closing", 1)
         while (!DoorMechanism.finished()) {
             Thread.sleep(1)
         }
         TUI.writeString("Door Closed", 1, center = true)
+        Thread.sleep(2000)
     }
 }
 
 fun main() {
     App.init()
-    while (true) {
-        App.use()
-        TUI.clearAndWrite("", 1)
-    }
+    App.use()
 }

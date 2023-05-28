@@ -1,27 +1,38 @@
-import java.lang.System.currentTimeMillis
-import java.sql.Time
-import java.time.Instant
-import kotlin.time.Duration.Companion.nanoseconds
+import kotlin.math.abs
 
 object TUI {
 
     private const val LCD_LENGTH = 16
+    const val TIMEOUT = "TIMEOUT"
     fun init() {
         LCD.init()
         KBD.init()
     }
 
-    fun writeAndReadString(msg: String, nameLength: Int, line: Int, col: Int = 0, encoded: Boolean = false): String {
+    fun writeAndReadString(
+        msg: String,
+        nameLength: Int,
+        line: Int,
+        col: Int = 0,
+        encoded: Boolean = false,
+    ): String {
         LCD.cursor(line, col)
         LCD.write(msg)
         var string = ""
         val `?` = "?".repeat(nameLength)
         LCD.write(`?`)
         LCD.cursor(line, col + msg.length)
+        var startTime = System.currentTimeMillis()
         do {
+            val elapsedTime = System.currentTimeMillis() - startTime
+            if (elapsedTime >= 5000) {
+                // Timeout occurred
+                return TIMEOUT
+            }
             val key = KBD.getKey()
             if (key != KBD.NONE) {
                 string += key
+                startTime = System.currentTimeMillis()
                 if (key == '*') writeAndReadString(msg, nameLength, line, col)
                 else {
                     if (encoded) LCD.write('*')
@@ -38,12 +49,6 @@ object TUI {
         writeString(msg, line, center = true)
     }
 
-    private fun writeStringAux(msg: String, line: Int, col: Int = 0) {
-        if (msg.length > LCD_LENGTH) throw IllegalArgumentException("String too long!")
-        LCD.cursor(line, col)
-        LCD.write(msg)
-    }
-
     fun writeBigString(msg: String, line: Int, col: Int = 0) {
         LCD.clear()
         val firstLine = msg.substring(0, minOf(msg.length, LCD_LENGTH - col))
@@ -51,8 +56,7 @@ object TUI {
         writeStringAux(firstLine, line, col)
         if (secondLine.isNotEmpty()) {
             require(line < 1) { "Second line is too long!" }
-            LCD.cursor(line + 1, 0)
-            LCD.write(secondLine)
+            writeStringAux(secondLine, line + 1)
         }
     }
 
@@ -66,32 +70,17 @@ object TUI {
             writeStringAux(msg, line, col)
         }
     }
+
+    fun clearLCD() = LCD.clear()
+
+    private fun writeStringAux(msg: String, line: Int, col: Int = 0) {
+        if (msg.length > LCD_LENGTH) throw IllegalArgumentException("String too long!")
+        LCD.cursor(line, col)
+        LCD.write(msg)
+        clearCursor(col + msg.length)
+    }
+
+    private fun clearCursor(col: Int = 0) = LCD.write(" ".repeat(abs(LCD_LENGTH - col)))
 }
 
 
-/**
- *     fun readInt(msg: String, numberLength: Int, encoded: Boolean = false): Int {
- *         while (true) {
- *             LCD.write(msg)
- *             var number: String = ""
- *             do {
- *                 val key = KBD.waitKey(5000)
- *                 if (key != KBD.NONE) {
- *                     number += key
- *                     if (key == '*') readInt(msg, numberLength)
- *                     else {
- *                         if (encoded) LCD.write('*')
- *                         else LCD.write(key)
- *                     }
- *                 }
- *             } while (number.length < numberLength)
- *             LCD.write(number)
- *             try {
- *                 return number.toInt()
- *             } catch (e: NumberFormatException) {
- *                 e.message?.let { LCD.write(it) }
- *             }
- *             LCD.write("Invalid value! Try again.")
- *         }
- *     }
- */

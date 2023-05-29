@@ -1,3 +1,4 @@
+import isel.leic.utils.Time.sleep
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,12 +21,12 @@ object App {
             val currDate = formatDate.format(calendar.time)
             TUI.writeString(currDate, 0)
             val uin = TUI.writeAndReadString("UIN:", 3, 1)
-            if (uin == TUI.TIMEOUT) use()
-            Thread.sleep(500)
+            if (uin == KBD.NONE.toString()) use()
+            activeWait(500)
             val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
-            if (pin == TUI.TIMEOUT) {
+            if (pin == KBD.NONE.toString()) { //TUI.TIMEOUT
                 TUI.writeString("Login Failed", 1, center = true)
-                Thread.sleep(3000)
+                activeWait(3000)
                 use()
             }
             Thread.sleep(500)
@@ -34,7 +35,7 @@ object App {
                 doorProcess()
             } else {
                 TUI.writeString("Login Failed", 1, center = true)
-                Thread.sleep(3000)
+                activeWait(3000)
             }
         }
     }
@@ -70,8 +71,18 @@ object App {
             Thread.sleep(1)
         }
         TUI.writeString("Door Closed", 1, center = true)
-        Thread.sleep(2000)
+        activeWait(2000)
     }
+
+    private fun activeWait(timeoutMillis: Long) {
+        val startTime = System.currentTimeMillis()
+        while (System.currentTimeMillis() - startTime < timeoutMillis) {
+            if (TUI.keyPressed()) {
+                return
+            }
+        }
+    }
+
 }
 
 fun main() {

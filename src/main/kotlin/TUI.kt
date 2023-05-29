@@ -22,23 +22,16 @@ object TUI {
         val `?` = "?".repeat(nameLength)
         LCD.write(`?`)
         LCD.cursor(line, col + msg.length)
-        var startTime = System.currentTimeMillis()
         do {
-            val elapsedTime = System.currentTimeMillis() - startTime
-            if (elapsedTime >= 5000) {
-                // Timeout occurred
-                return TIMEOUT
-            }
-            val key = KBD.getKey()
+            val key = KBD.waitKey(5000)
             if (key != KBD.NONE) {
                 string += key
-                startTime = System.currentTimeMillis()
                 if (key == '*') writeAndReadString(msg, nameLength, line, col)
                 else {
                     if (encoded) LCD.write('*')
                     else LCD.write(key)
                 }
-            }
+            } else return KBD.NONE.toString()
         } while (string.length < nameLength && string != `?`)
 
         return string
@@ -73,6 +66,8 @@ object TUI {
 
     fun clearLCD() = LCD.clear()
 
+    fun keyPressed() = KBD.getKey() != KBD.NONE
+
     private fun writeStringAux(msg: String, line: Int, col: Int = 0) {
         if (msg.length > LCD_LENGTH) throw IllegalArgumentException("String too long!")
         LCD.cursor(line, col)
@@ -83,4 +78,10 @@ object TUI {
     private fun clearCursor(col: Int = 0) = LCD.write(" ".repeat(abs(LCD_LENGTH - col)))
 }
 
+fun main(){
+    TUI.init()
+    TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
+    TUI.clearAndWrite("Hello", 0)
+    TUI.writeString("Hello", 1, center = true)
+}
 

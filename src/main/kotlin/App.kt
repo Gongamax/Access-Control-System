@@ -24,7 +24,7 @@ object App {
             if (uin == KBD.NONE.toString()) use()
             activeWait(500)
             val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
-            if (pin == KBD.NONE.toString()) { //TUI.TIMEOUT
+            if (pin == KBD.NONE.toString()) {
                 TUI.writeString("Login Failed", 1, center = true)
                 activeWait(3000)
                 use()

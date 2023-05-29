@@ -3,7 +3,7 @@ import kotlin.math.abs
 object TUI {
 
     private const val LCD_LENGTH = 16
-    const val TIMEOUT = "TIMEOUT"
+
     fun init() {
         LCD.init()
         KBD.init()

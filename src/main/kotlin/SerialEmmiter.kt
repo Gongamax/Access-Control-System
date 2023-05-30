@@ -1,13 +1,11 @@
 import HAL.setBits
 
 //Os valores nas constantes não estão corretos, são apenas para testar
-const val nSS_DOOR = 0x08
 const val SDXCLK = 0x04
 const val SDX = 0x02
 const val nSS_LCD = 0x01
 
 const val Busy_Addr = 0x20
-const val ack = 0x80
 const val DOOR_ADDR = 0x08
 
 // Envia tramas para os diferentes módulos Serial Receiver.

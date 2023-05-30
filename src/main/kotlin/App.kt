@@ -3,13 +3,12 @@ import java.util.*
 
 object App {
 
-    private val HARDCODED_USER = User("000", "John Johnson", "1234", "Johnson machine is ready")
     private const val DOOR_VELOCITY = 0x02
 
     fun init() {
-        TUI.init()
         DoorMechanism.init()
         DoorMechanism.close(DOOR_VELOCITY)
+        TUI.init()
     }
 
     fun use() {
@@ -23,7 +22,6 @@ object App {
             do {
                 uin = TUI.writeAndReadString("UIN:", 3, 1)
             } while (uin == KBD.NONE.toString())
-            //if (uin == KBD.NONE.toString()) use()
             activeWait(500)
             val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
             if (pin == KBD.NONE.toString()) {
@@ -32,8 +30,9 @@ object App {
                 use()
             }
             Thread.sleep(500)
-            if (authenticateUser(uin, pin)) {
-                afterLogin()
+            val user = authenticateUser(uin, pin)
+            if (user != null) {
+                afterLogin(user)
                 doorProcess()
             } else {
                 TUI.writeString("Login Failed", 1, center = true)
@@ -46,17 +45,20 @@ object App {
      * Basic authentication method, since at the moment
      * it's only possible to log in with the hardcoded user.
      */
-    private fun authenticateUser(uin: String, pin: String): Boolean {
-        return uin == HARDCODED_USER.uin && pin == HARDCODED_USER.pin
+    private fun authenticateUser(uin: String, pin: String): User? {
+        val list = Users().getAllUsers()
+        return list
+            .firstOrNull { user -> user.uin.padStart(3, '0') == uin && user.pin == Users().encryptPIN(pin) }
     }
 
-    private fun afterLogin() {
+
+    private fun afterLogin(user: User) {
         TUI.clearAndWrite("Hello", 0)
-        TUI.writeString(HARDCODED_USER.name, 1, center = true)
+        TUI.writeString(user.name, 1, center = true)
         Thread.sleep(1000)
-        TUI.writeBigString(HARDCODED_USER.message, 0)
+        if (user.message.isNotEmpty()) TUI.writeBigString(user.message, 0)
         Thread.sleep(1000)
-        TUI.writeString(HARDCODED_USER.name, 0, center = true)
+        TUI.writeString(user.name, 0, center = true)
     }
 
     private fun doorProcess() {

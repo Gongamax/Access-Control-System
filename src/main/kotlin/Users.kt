@@ -15,6 +15,7 @@ class Users(private val maxSize: Int = MAX_USERS) {
         val encryptedPIN = encryptPIN(pin)
         val uin = generateUIN().toString().padStart(3, '0')
         val newUser = User(uin, name, encryptedPIN)
+        println(newUser)
         users.put(uin, newUser)
         println("Utilizador adicionado. UIN: $uin")
     }
@@ -36,24 +37,35 @@ class Users(private val maxSize: Int = MAX_USERS) {
 
     // Obter todos os utilizadores
     fun getAllUsers(): List<User> {
+        FileAccess.readTextFile("USERS.txt").forEach {
+            if (it.isEmpty()) return@forEach
+            val (uin, pin, name, message) = it.split(";")
+            val user = User(uin, name, pin, message)
+            users.put(uin, user)
+        }
         return users.values.toList()
     }
 
     //Esta função vai ser chamada no App.kt
-    private fun saveUsersToFile() {
-        val content = users.values.joinToString("\n") { "${it.name}, ${it.pin}" }
+    fun saveUsersToFile() {
+        val content = getAllUsers()
+            .joinToString("\n") { "${it.uin};${it.pin};${it.name};${it.message};" }
         FileAccess.writeFileFromZero("USERS.txt", content)
     }
 
-    private fun encryptPIN(pin: String): String {
+    fun encryptPIN(pin: String): String {
         val md = MessageDigest.getInstance("SHA-256")
         val hashedBytes = md.digest(pin.toByteArray())
         return hashedBytes.joinToString("") { "%02x".format(it) }
     }
 }
 
+
 fun main() {
     val users = Users()
-    users.addUser("USER1", "1234")
-    users.getAllUsers()
+    val user = users.addUser("John Jones", "1234")
+
+//    Users().saveUsersToFile()
+    //val usersList = users.getAllUsers().toString()
+    //println(usersList)
 }

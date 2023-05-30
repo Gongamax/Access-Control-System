@@ -1,4 +1,3 @@
-import isel.leic.utils.Time.sleep
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,8 +19,11 @@ object App {
             val calendar = Calendar.getInstance()
             val currDate = formatDate.format(calendar.time)
             TUI.writeString(currDate, 0)
-            val uin = TUI.writeAndReadString("UIN:", 3, 1)
-            if (uin == KBD.NONE.toString()) use()
+            lateinit var uin: String
+            do {
+                uin = TUI.writeAndReadString("UIN:", 3, 1)
+            } while (uin == KBD.NONE.toString())
+            //if (uin == KBD.NONE.toString()) use()
             activeWait(500)
             val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
             if (pin == KBD.NONE.toString()) {
@@ -66,7 +68,7 @@ object App {
         TUI.writeString("Door Open", 1, center = true)
         Thread.sleep(5000)
         DoorMechanism.close(DOOR_VELOCITY)
-        TUI.writeString("Door Closing", 1)
+        TUI.writeString("Door Closing", 1, center = true)
         while (!DoorMechanism.finished()) {
             Thread.sleep(1)
         }

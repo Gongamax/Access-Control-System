@@ -25,9 +25,12 @@ object TUI {
         do {
             val key = KBD.waitKey(5000)
             if (key != KBD.NONE) {
-                string += key
-                if (key == '*') writeAndReadString(msg, nameLength, line, col)
-                else {
+                if (key == '*') {
+                    //writeAndReadString(msg, nameLength, line, col, encoded)
+                    reset(`?`, line, col + msg.length)
+                    string = ""
+                } else {
+                    string += key
                     if (encoded) LCD.write('*')
                     else LCD.write(key)
                 }
@@ -35,6 +38,12 @@ object TUI {
         } while (string.length < nameLength && string != `?`)
 
         return string
+    }
+
+    private fun reset(msg: String, line: Int, col: Int) {
+        LCD.cursor(line, col)
+        LCD.write(msg)
+        LCD.cursor(line, col)
     }
 
     fun clearAndWrite(msg: String, line: Int, col: Int = 0) {
@@ -78,7 +87,7 @@ object TUI {
     private fun clearCursor(col: Int = 0) = LCD.write(" ".repeat(abs(LCD_LENGTH - col)))
 }
 
-fun main(){
+fun main() {
     TUI.init()
     TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
     TUI.clearAndWrite("Hello", 0)

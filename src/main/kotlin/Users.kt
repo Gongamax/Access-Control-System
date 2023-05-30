@@ -1,26 +1,26 @@
 import java.security.MessageDigest
 
-data class User(val uin: String, val name: String, val pin: String, val message : String = "")
+data class User(val uin: Int, val name: String, var pin: String, val message : String = "")
 
 const val MAX_USERS = 100
 
 class Users(private val maxSize: Int = MAX_USERS) {
 
-    private val users: HashMap<String, User> = HashMap(maxSize)
+    private val users: HashMap<Int, User> = HashMap(maxSize)
 
     fun addUser(name: String, pin: String) {
         if (users.size >= MAX_USERS) {
             error("Maximum number of users reached")
         }
         val encryptedPIN = encryptPIN(pin)
-        val uin = generateUIN().toString().padStart(3, '0')
+        val uin = generateUIN()
         val newUser = User(uin, name, encryptedPIN)
         println(newUser)
         users.put(uin, newUser)
         println("Utilizador adicionado. UIN: $uin")
     }
 
-    fun removeUser(uin: String) {
+    fun removeUser(uin: Int) {
         if (users.containsKey(uin)) {
             users.remove(uin)
             println("Utilizador removido. UIN: $uin")
@@ -29,26 +29,43 @@ class Users(private val maxSize: Int = MAX_USERS) {
         }
     }
 
+    fun changePin(uin: Int, newPin: String) {
+        if (users.containsKey(uin)) {
+            val encryptedPIN = encryptPIN(newPin)
+            users[uin]?.pin = encryptedPIN
+            println("PIN alterado. UIN: $uin")
+        } else {
+            println("Utilizador não encontrado. UIN: $uin")
+        }
+    }
+
     private fun generateUIN(): Int {
-        val lastUin = if (users.size > 0) users.keys.max().toInt() else -1
+        val users = getAllUsers()
+        val lastUin = if (users.size > 0) users.maxBy { it.uin }.uin.toInt() else -1//.max().toInt() else -1
         if (lastUin < MAX_USERS)
             return lastUin + 1 else error("No more users avaiable")
     }
 
     // Obter todos os utilizadores
-    fun getAllUsers(): List<User> {
+    private fun getAllUsers(): List<User> {
         FileAccess.readTextFile("USERS.txt").forEach {
             if (it.isEmpty()) return@forEach
             val (uin, pin, name, message) = it.split(";")
-            val user = User(uin, name, pin, message)
-            users.put(uin, user)
+            val user = User(uin.toInt(), name, pin, message)
+            users.put(uin.toInt(), user)
         }
         return users.values.toList()
     }
 
+    fun authenticateUser(uin: String, pin: String): User? {
+        val list = Users().getAllUsers()
+        return list
+            .firstOrNull { user -> user.uin == uin.toInt() && user.pin == Users().encryptPIN(pin) }
+    }
+
     //Esta função vai ser chamada no App.kt
     fun saveUsersToFile() {
-        val content = getAllUsers()
+        val content = users.values.toList()
             .joinToString("\n") { "${it.uin};${it.pin};${it.name};${it.message};" }
         FileAccess.writeFileFromZero("USERS.txt", content)
     }
@@ -64,8 +81,7 @@ class Users(private val maxSize: Int = MAX_USERS) {
 fun main() {
     val users = Users()
     val user = users.addUser("John Jones", "1234")
-
-//    Users().saveUsersToFile()
+    users.saveUsersToFile()
     //val usersList = users.getAllUsers().toString()
     //println(usersList)
 }

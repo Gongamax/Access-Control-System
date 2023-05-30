@@ -26,7 +26,6 @@ object TUI {
             val key = KBD.waitKey(5000)
             if (key != KBD.NONE) {
                 if (key == '*') {
-                    //writeAndReadString(msg, nameLength, line, col, encoded)
                     reset(`?`, line, col + msg.length)
                     string = ""
                 } else {
@@ -38,6 +37,17 @@ object TUI {
         } while (string.length < nameLength && string != `?`)
 
         return string
+    }
+
+    fun readResponse(msg: String, key : Char, line: Int, col: Int = 0): Boolean {
+        writeString(msg, line, col, center = true)
+        do {
+            val readKey = KBD.waitKey(5000)
+            if (readKey == '*') {
+                return true
+            }
+        } while (KBD.waitKey(5000) != key)
+        return false
     }
 
     private fun reset(msg: String, line: Int, col: Int) {

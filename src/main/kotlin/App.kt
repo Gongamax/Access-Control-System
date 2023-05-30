@@ -4,7 +4,7 @@ import java.util.*
 object App {
 
     private const val DOOR_VELOCITY = 0x02
-
+    private val USERS = Users()
     fun init() {
         DoorMechanism.init()
         DoorMechanism.close(DOOR_VELOCITY)
@@ -30,7 +30,7 @@ object App {
                 use()
             }
             Thread.sleep(500)
-            val user = authenticateUser(uin, pin)
+            val user = USERS.authenticateUser(uin, pin)
             if (user != null) {
                 afterLogin(user)
                 doorProcess()
@@ -41,20 +41,28 @@ object App {
         }
     }
 
-    /**
-     * Basic authentication method, since at the moment
-     * it's only possible to log in with the hardcoded user.
-     */
-    private fun authenticateUser(uin: String, pin: String): User? {
-        val list = Users().getAllUsers()
-        return list
-            .firstOrNull { user -> user.uin.padStart(3, '0') == uin && user.pin == Users().encryptPIN(pin) }
+    private fun changePin(uin: Int) {
+        TUI.writeString("Change PIN?", 0, center = true)
+        TUI.readResponse("Yes? press *", '*', 1)
+        TUI.clearLCD()
+        val pin = TUI.writeAndReadString("New PIN:", 4, 0, encoded = true)
+        val rPin = TUI.writeAndReadString("Reinsert new PIN:", 4, 0, encoded = true)
+        if (pin == rPin) {
+            USERS.changePin(uin, pin)
+            TUI.writeString("PIN Changed", 1, center = true)
+            activeWait(2000)
+            return
+        } else {
+            TUI.writeString("PINs don't match", 1, center = true)
+            activeWait(2000)
+        }
     }
-
 
     private fun afterLogin(user: User) {
         TUI.clearAndWrite("Hello", 0)
         TUI.writeString(user.name, 1, center = true)
+        val key = KBD.waitKey(2000)
+        if (key == '#') changePin(user.uin)
         Thread.sleep(1000)
         if (user.message.isNotEmpty()) TUI.writeBigString(user.message, 0)
         Thread.sleep(1000)

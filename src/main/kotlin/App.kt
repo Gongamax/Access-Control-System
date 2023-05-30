@@ -139,20 +139,21 @@ object App {
 
     private fun changePin(uin: Int) {
         TUI.writeString("Change PIN?", 0, center = true)
-        TUI.readResponse("Yes? press *", '*', 1)
+        val toChange = TUI.readResponse("(Yes=*)", '*', 1)
+        if (!toChange) return
         TUI.clearLCD()
         TUI.writeString("Insert", 0, center = true)
         val pin = TUI.writeAndReadString("new PIN:", 4, 1, encoded = true)
         TUI.writeString("Reinsert", 0, center = true)
         val rPin = TUI.writeAndReadString("new PIN:", 4, 1, encoded = true)
         TUI.clearLCD()
-        if (pin == rPin) {
+        if (pin == rPin && pin != KBD.NONE.toString()) {
             USERS.changePin(uin, pin)
             TUI.writeString("PIN Changed", 0, center = true)
             activeWait(2000)
             return
         } else {
-            TUI.writeBigString("PIN has been helded", 1)
+            TUI.writeBigString("PIN has been held", 0, center = true)
             activeWait(2000)
         }
     }
@@ -161,7 +162,6 @@ object App {
         TUI.clearAndWrite("Hello", 0)
         TUI.writeString(user.name, 1, center = true)
         if (TUI.checkKeyPressed(2000, '#')) changePin(user.uin)
-        //Thread.sleep(1000)
         if (user.message.isNotEmpty()) TUI.writeBigString(user.message, 0)
         Thread.sleep(1000)
         TUI.writeString(user.name, 0, center = true)

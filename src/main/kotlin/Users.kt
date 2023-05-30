@@ -43,7 +43,7 @@ class Users(private val maxSize: Int = MAX_USERS) {
 
     private fun generateUIN(): Int {
         val users = getAllUsers()
-        val lastUin = if (users.size > 0) users.maxBy { it.uin }.uin.toInt() else -1//.max().toInt() else -1
+        val lastUin = if (users.isNotEmpty()) users.maxBy { it.uin }.uin else -1
         if (lastUin < MAX_USERS)
             return lastUin + 1 else error("No more users avaiable")
     }
@@ -58,7 +58,6 @@ class Users(private val maxSize: Int = MAX_USERS) {
         }
         return users.values.toList()
     }
-
 
     fun authenticateUser(uin: String, pin: String): User? {
         val list = Users().getAllUsers()
@@ -83,6 +82,10 @@ class Users(private val maxSize: Int = MAX_USERS) {
 
 fun main() {
     val users = Users()
+    val user = users.addUser("Connor McGregor", "2222")
+    users.saveUsersToFile()
+    //val usersList = users.getAllUsers().toString()
+    //println(usersList)
    // val user = users.addUser("Manuel", "1111")
     //users.saveUsersToFile()
     val usersList = users.getAllUsers().toString()

@@ -39,15 +39,10 @@ object TUI {
         return string
     }
 
-    fun readResponse(msg: String, key : Char, line: Int, col: Int = 0): Boolean {
+    fun readResponse(msg: String, key: Char, line: Int, col: Int = 0): Boolean {
         writeString(msg, line, col, center = true)
-        do {
-            val readKey = KBD.waitKey(5000)
-            if (readKey == '*') {
-                return true
-            }
-        } while (KBD.waitKey(5000) != key)
-        return false
+        val readKey = KBD.waitKey(3000)
+        return readKey == key
     }
 
     private fun reset(msg: String, line: Int, col: Int) {
@@ -61,14 +56,16 @@ object TUI {
         writeString(msg, line, center = true)
     }
 
-    fun writeBigString(msg: String, line: Int, col: Int = 0) {
+    fun writeBigString(msg: String, line: Int, col: Int = 0, center: Boolean = false) {
         LCD.clear()
-        val firstLine = msg.substring(0, minOf(msg.length, LCD_LENGTH - col))
-        val secondLine = msg.substring(maxOf(0, LCD_LENGTH - col))
-        writeStringAux(firstLine, line, col)
+        val words = msg.split(" ")
+        var length = 0
+        val firstLine = words.takeWhile { length += it.length + 1; length <= LCD_LENGTH }
+        val secondLine = words - firstLine
+        writeString(firstLine.joinToString(" "), line, col, center = center)
         if (secondLine.isNotEmpty()) {
             require(line < 1) { "Second line is too long!" }
-            writeStringAux(secondLine, line + 1)
+            writeString(secondLine.joinToString(" "), line + 1, center = center)
         }
     }
 
@@ -87,7 +84,7 @@ object TUI {
 
     fun keyPressed() = KBD.getKey() != KBD.NONE
 
-    fun checkKeyPressed(timeout : Long, key: Char) = KBD.waitKey(timeout) == key
+    fun checkKeyPressed(timeout: Long, key: Char) = KBD.waitKey(timeout) == key
 
     private fun writeStringAux(msg: String, line: Int, col: Int = 0) {
         if (msg.length > LCD_LENGTH) throw IllegalArgumentException("String too long!")
@@ -101,8 +98,9 @@ object TUI {
 
 fun main() {
     TUI.init()
-    TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
-    TUI.clearAndWrite("Hello", 0)
-    TUI.writeString("Hello", 1, center = true)
+//    TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
+//    TUI.clearAndWrite("Hello", 0)
+//    TUI.writeString("Hello", 1, center = true)
+    TUI.writeBigString("PIN has been held", 0, center = true)
 }
 

@@ -8,6 +8,7 @@ object App {
 
     private const val DOOR_VELOCITY = 0x01
     private val USERS = Users()
+    private val LOG = Log()
     private enum class Manut { NEW, DEL, MSG, OFF }
 
     fun init() {
@@ -44,6 +45,7 @@ object App {
             Thread.sleep(500)
             val user = USERS.authenticateUser(uin, pin)
             if (user != null) {
+                LOG.registerAccess(user, currDate)
                 afterLogin(user)
                 doorProcess()
             } else {

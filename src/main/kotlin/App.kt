@@ -45,15 +45,18 @@ object App {
         TUI.writeString("Change PIN?", 0, center = true)
         TUI.readResponse("Yes? press *", '*', 1)
         TUI.clearLCD()
-        val pin = TUI.writeAndReadString("New PIN:", 4, 0, encoded = true)
-        val rPin = TUI.writeAndReadString("Reinsert new PIN:", 4, 0, encoded = true)
+        TUI.writeString("Insert", 0, center = true)
+        val pin = TUI.writeAndReadString("new PIN:", 4, 1, encoded = true)
+        TUI.writeString("Reinsert", 0, center = true)
+        val rPin = TUI.writeAndReadString("new PIN:", 4, 1, encoded = true)
+        TUI.clearLCD()
         if (pin == rPin) {
             USERS.changePin(uin, pin)
-            TUI.writeString("PIN Changed", 1, center = true)
+            TUI.writeString("PIN Changed", 0, center = true)
             activeWait(2000)
             return
         } else {
-            TUI.writeString("PINs don't match", 1, center = true)
+            TUI.writeBigString("PIN has been helded", 1)
             activeWait(2000)
         }
     }
@@ -61,9 +64,8 @@ object App {
     private fun afterLogin(user: User) {
         TUI.clearAndWrite("Hello", 0)
         TUI.writeString(user.name, 1, center = true)
-        val key = KBD.waitKey(2000)
-        if (key == '#') changePin(user.uin)
-        Thread.sleep(1000)
+        if (TUI.checkKeyPressed(2000, '#')) changePin(user.uin)
+        //Thread.sleep(1000)
         if (user.message.isNotEmpty()) TUI.writeBigString(user.message, 0)
         Thread.sleep(1000)
         TUI.writeString(user.name, 0, center = true)

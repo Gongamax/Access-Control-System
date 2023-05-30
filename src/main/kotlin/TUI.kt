@@ -87,6 +87,8 @@ object TUI {
 
     fun keyPressed() = KBD.getKey() != KBD.NONE
 
+    fun checkKeyPressed(timeout : Long, key: Char) = KBD.waitKey(timeout) == key
+
     private fun writeStringAux(msg: String, line: Int, col: Int = 0) {
         if (msg.length > LCD_LENGTH) throw IllegalArgumentException("String too long!")
         LCD.cursor(line, col)

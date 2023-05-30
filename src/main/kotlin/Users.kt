@@ -30,9 +30,11 @@ class Users(private val maxSize: Int = MAX_USERS) {
     }
 
     fun changePin(uin: Int, newPin: String) {
-        if (users.containsKey(uin)) {
+        val users = getAllUsers()
+        if (users.any { it.uin==uin }) {
             val encryptedPIN = encryptPIN(newPin)
-            users[uin]?.pin = encryptedPIN
+            users[uin].pin = encryptedPIN
+            saveUsersToFile()
             println("PIN alterado. UIN: $uin")
         } else {
             println("Utilizador não encontrado. UIN: $uin")

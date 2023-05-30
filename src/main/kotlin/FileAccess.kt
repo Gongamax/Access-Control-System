@@ -23,7 +23,7 @@ object FileAccess {
         try {
             val writer = BufferedWriter(FileWriter(fileName, true))
             writer.use {
-                it.append("\n")
+                //it.append("\n")
                 it.append(content)
             }
         } catch (e: IOException) {
@@ -37,8 +37,8 @@ object FileAccess {
 }
 
 fun main(){
-    val content = "Hello World 5!"
-    FileAccess.writeFile("test.txt", content)
+   // val content = "Hello World 5!"
+    //FileAccess.writeFile("test.txt", content)
     val read  = FileAccess.readTextFile("test.txt")
     println(read)
 }

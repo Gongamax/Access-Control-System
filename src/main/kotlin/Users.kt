@@ -49,8 +49,8 @@ class Users(private val maxSize: Int = MAX_USERS) {
     }
 
     // Obter todos os utilizadores
-    private fun getAllUsers(): List<User> {
-        FileAccess.readTextFile("USERS.txt").forEach {
+   fun getAllUsers(): List<User> {
+        FileAccess.readTextFile("MY_USERS.txt").forEach {
             if (it.isEmpty()) return@forEach
             val (uin, pin, name, message) = it.split(";")
             val user = User(uin.toInt(), name, pin, message)
@@ -58,6 +58,7 @@ class Users(private val maxSize: Int = MAX_USERS) {
         }
         return users.values.toList()
     }
+
 
     fun authenticateUser(uin: String, pin: String): User? {
         val list = Users().getAllUsers()
@@ -69,7 +70,7 @@ class Users(private val maxSize: Int = MAX_USERS) {
     fun saveUsersToFile() {
         val content = users.values.toList()
             .joinToString("\n") { "${it.uin};${it.pin};${it.name};${it.message};" }
-        FileAccess.writeFileFromZero("USERS.txt", content)
+        FileAccess.writeFileFromZero("MY_USERS.txt", content)
     }
 
     fun encryptPIN(pin: String): String {
@@ -82,8 +83,10 @@ class Users(private val maxSize: Int = MAX_USERS) {
 
 fun main() {
     val users = Users()
-    val user = users.addUser("John Jones", "1234")
-    users.saveUsersToFile()
-    //val usersList = users.getAllUsers().toString()
-    //println(usersList)
+   // val user = users.addUser("Manuel", "1111")
+    //users.saveUsersToFile()
+    val usersList = users.getAllUsers().toString()
+    val a = users.getAllUsers()
+    println(a.get(0).name)
+    println(usersList)
 }

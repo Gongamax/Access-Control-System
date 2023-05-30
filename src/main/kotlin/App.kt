@@ -1,14 +1,25 @@
+import FileAccess.readTextFile
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.io.path.Path
+import kotlin.system.exitProcess
 
 object App {
 
-    private const val DOOR_VELOCITY = 0x02
+    private const val DOOR_VELOCITY = 0x01
     private val USERS = Users()
+    private enum class Manut { NEW, DEL, MSG, OFF }
+
     fun init() {
         DoorMechanism.init()
         DoorMechanism.close(DOOR_VELOCITY)
         TUI.init()
+        TUI.writeString("Initializing..", 0, center = true)
+        TUI.writeString("Wait Please...", 1, center = true)
+        while (!DoorMechanism.finished()) {
+            Thread.sleep(1)
+        }
+
     }
 
     fun use() {
@@ -21,6 +32,7 @@ object App {
             lateinit var uin: String
             do {
                 uin = TUI.writeAndReadString("UIN:", 3, 1)
+                modeMaintenance()
             } while (uin == KBD.NONE.toString())
             activeWait(500)
             val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
@@ -40,6 +52,90 @@ object App {
             }
         }
     }
+
+    private fun modeMaintenance() {
+        Maintenance.init()
+        if (Maintenance.isMaintenance()) {
+            TUI.writeString("Out of Service", 0, center = true)
+            TUI.writeString("Wait", 1, center = true)
+            println("Turn M key to off, to terminate the maintenance mode.")
+            println("Commands: ${Manut.values().joinToString { "$it" }}.")
+            do {
+                print("Maintenance> ")
+                val command = readln().uppercase().trim()
+                if (!(Manut.values().toList().any { it.name == command }))
+                    println("Invalid command.")
+                else {
+                    when (Manut.valueOf(command)) {
+                        Manut.NEW -> newManutMode()
+                        Manut.DEL -> delManutMode()
+                        Manut.MSG -> msgManutMode()
+                        Manut.OFF -> offManutMode()
+                    }
+                }
+            } while (command != Manut.OFF.toString())
+        }
+    }
+
+    private fun newManutMode() {
+        while (true){
+            print("User name? ")
+            val name = readln().trim()
+            if(name.length> 16){
+                println("The $name has more than 16 chars.")
+                break
+            }else if(name.isEmpty()){
+                println("Aborted command.")
+                break
+            }
+            print("PIN? ")
+            val pin = readln().trim()
+            if(pin.length> 4){
+                println("The length pf $pin is only of 4 digits.")
+                break
+            } else if(pin.isEmpty()){
+                println("Aborted command.")
+                break
+            }
+            val uin = USERS.getAllUsers().size + 1
+            USERS.addUser(name, pin)
+            println("Adding user user $uin: $name")
+            return
+        }
+    }
+
+    private fun delManutMode() {
+        while (true){
+            print("UIN? ")
+            val uin = readln().trim()
+            if( uin.length != 3  ||  !(USERS.getAllUsers().any { it.uin == uin.toInt() })){
+                println("Invalid UIN.")
+                break
+            }
+            val  name = USERS.getAllUsers().get(uin.toInt()).name
+            print("Y/N? ")
+            val answer = readln().trim()
+           if(answer != "Y"){
+               println("Command aborted.")
+               break
+           }
+            println("Remove user $uin:$name")
+            USERS.removeUser(uin.toInt())
+            return
+        }
+
+    }
+    private fun offManutMode() {
+        TUI.writeString("Shutdown...", 1, center = true)
+        Thread.sleep(3000)
+        USERS.saveUsersToFile()
+        exitProcess(0)
+    }
+
+    private fun msgManutMode() {
+        TODO("Not yet implemented")
+    }
+
 
     private fun changePin(uin: Int) {
         TUI.writeString("Change PIN?", 0, center = true)

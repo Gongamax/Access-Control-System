@@ -1,6 +1,6 @@
 import java.security.MessageDigest
 
-data class User(val uin: Int, val name: String, var pin: String, val message : String = "")
+data class User(val uin: Int, val name: String, var pin: String, var message : String = "")
 
 const val MAX_USERS = 100
 
@@ -36,6 +36,19 @@ class Users(private val maxSize: Int = MAX_USERS) {
             users[uin].pin = encryptedPIN
             saveUsersToFile()
             println("PIN alterado. UIN: $uin")
+        } else {
+            println("Utilizador não encontrado. UIN: $uin")
+        }
+    }
+
+    fun changeMessage(uin: Int, message: String) {
+        val users = getAllUsers()
+        if (users.any { it.uin == uin }) {
+            users[uin].message = message
+            saveUsersToFile()
+            if (message != "") {
+                println("The message \"$message\" has been associated to $uin:${users[uin].name}")
+            }
         } else {
             println("Utilizador não encontrado. UIN: $uin")
         }

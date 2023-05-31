@@ -1,7 +1,5 @@
-import FileAccess.readTextFile
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.io.path.Path
 import kotlin.system.exitProcess
 
 object App {
@@ -141,7 +139,33 @@ object App {
     }
 
     private fun msgManutMode() {
-        TODO("Not yet implemented")
+        while (true) {
+            print("UIN? ")
+            val uin = readln().trim()
+            if (uin.length != 3 || !(USERS.getAllUsers().any { it.uin == uin.toInt() })) {
+                println("Invalid UIN.")
+                break
+            }
+            val message = USERS.getAllUsers().get(uin.toInt()).message
+            if (message != "") {
+                println("User has this message: $message")
+                print("Remove this message Y/N? ")
+                val confirm = readln().uppercase().trim()
+                if (confirm != "Y") {
+                    println("Command aborted.")
+                    break
+                }
+                print("Message? ")
+                val m = readln()
+                USERS.changeMessage(uin.toInt(), m)
+                break
+            } else {
+                print("Message? ")
+                val m = readln()
+                USERS.changeMessage(uin.toInt(), m)
+                break
+            }
+        }
     }
 
 

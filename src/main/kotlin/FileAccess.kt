@@ -23,8 +23,8 @@ object FileAccess {
         try {
             val writer = BufferedWriter(FileWriter(fileName, true))
             writer.use {
-                //it.append("\n")
                 it.append(content)
+                it.append("\n")
             }
         } catch (e: IOException) {
             e.printStackTrace()

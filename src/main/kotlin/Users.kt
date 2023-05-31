@@ -2,7 +2,7 @@ import java.security.MessageDigest
 
 data class User(val uin: Int, val name: String, var pin: String, var message: String = "")
 
-const val MAX_USERS = 100
+const val MAX_USERS = 1000
 
 class Users(private val maxSize: Int = MAX_USERS) {
 
@@ -31,22 +31,21 @@ class Users(private val maxSize: Int = MAX_USERS) {
             users.remove(uin)
             println("User $uin:$name removed")
         }
-
     }
 
 
     /**
      * Função que altera o PIN
      */
-    fun changePin(uin: Int, newPin: String) {
-        val users = getAllUsers()
-        if (users.any { it.uin == uin }) {
+    fun changePin(uin: Int, newPin: String, update: Boolean) {
+        val users = getAllUsers()[uin]
+        if ( update) {
             val encryptedPIN = encryptPIN(newPin)
-            users[uin].pin = encryptedPIN
-            saveUsersToFile()
-            println("PIN alterado. UIN: $uin")
+            println(users.pin)
+            users.pin = encryptedPIN
+            println(users.pin)
         } else {
-            println("Utilizador não encontrado. UIN: $uin")
+           getAllUsers()
         }
     }
 

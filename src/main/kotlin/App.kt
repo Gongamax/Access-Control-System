@@ -172,18 +172,21 @@ object App {
         val toChange = TUI.readResponse("(Yes=*)", '*', 1)
         if (!toChange) return
         TUI.clearLCD()
-        TUI.writeString("Insert", 0, center = true)
-        val pin = TUI.writeAndReadString("new PIN:", 4, 1, encoded = true)
-        TUI.writeString("Reinsert", 0, center = true)
-        val rPin = TUI.writeAndReadString("new PIN:", 4, 1, encoded = true)
+        TUI.writeString("Insert New", 0, center = true)
+        val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
+        TUI.writeString("Re-insert New", 0, center = true)
+        val rPin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
         TUI.clearLCD()
         if (pin == rPin && pin != KBD.NONE.toString()) {
-            USERS.changePin(uin, pin)
-            TUI.writeString("PIN Changed", 0, center = true)
+            USERS.changePin(uin, pin, true)
+            TUI.writeString("PIN has been", 0, center =true)
+            TUI.writeString("changed", 1, center = true)
             activeWait(2000)
             return
         } else {
-            TUI.writeBigString("PIN has been held", 0, center = true)
+            USERS.changePin(uin, pin, false)
+            TUI.writeString("PIN has been", 0, center =true)
+            TUI.writeString("helded", 1, center = true)
             activeWait(2000)
         }
     }

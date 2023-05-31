@@ -104,9 +104,7 @@ object App {
                 println("Aborted command.")
                 break
             }
-            val uin = USERS.getAllUsers().size + 1
             USERS.addUser(name, pin)
-            println("Adding user user $uin: $name")
             return
         }
     }
@@ -119,14 +117,14 @@ object App {
                 println("Invalid UIN.")
                 break
             }
-            val name = USERS.getAllUsers().get(uin.toInt()).name
+            val name = USERS.getAllUsers()[uin.toInt()].name
+            println("Remove user $uin:$name")
             print("Y/N? ")
             val answer = readln().trim()
             if (answer != "Y") {
                 println("Command aborted.")
                 break
             }
-            println("Remove user $uin:$name")
             USERS.removeUser(uin.toInt())
             return
         }
@@ -177,14 +175,14 @@ object App {
 
     private fun doorProcess() {
         DoorMechanism.open(DOOR_VELOCITY)
-        TUI.writeString("Door Opening", 1, center = true)
+        TUI.writeString("Door Opening...", 1, center = true)
         while (!DoorMechanism.finished()) {
             Thread.sleep(1)
         }
         TUI.writeString("Door Open", 1, center = true)
         Thread.sleep(5000)
         DoorMechanism.close(DOOR_VELOCITY)
-        TUI.writeString("Door Closing", 1, center = true)
+        TUI.writeString("Door Closing...", 1, center = true)
         while (!DoorMechanism.finished()) {
             Thread.sleep(1)
         }

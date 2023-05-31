@@ -119,7 +119,7 @@ object App {
             val name = USERS.nameUser(uin)
             println("Remove user $uin:$name")
             print("Y/N? ")
-            val answer = readln().trim()
+            val answer = readln().uppercase().trim()
             if (answer != "Y") {
                 println("Command aborted.")
                 break

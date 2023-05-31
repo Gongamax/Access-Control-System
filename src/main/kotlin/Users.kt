@@ -26,7 +26,7 @@ class Users(private val maxSize: Int = MAX_USERS) {
      * Função que remove um utilizador
      */
     fun removeUser(uin: Int) {
-        val name = getAllUsers()[uin].name
+        val name = users[uin]?.name
         if (users.containsKey(uin)){
             users.remove(uin)
             println("User $uin:$name removed")
@@ -37,27 +37,21 @@ class Users(private val maxSize: Int = MAX_USERS) {
     /**
      * Função que altera o PIN
      */
-    fun changePin(uin: Int, newPin: String, update: Boolean) {
-        val users = getAllUsers()[uin]
-        if ( update) {
+    fun changePin(uin: Int, newPin: String) {
+        val users = users[uin]
             val encryptedPIN = encryptPIN(newPin)
-            println(users.pin)
-            users.pin = encryptedPIN
-            println(users.pin)
-        } else {
-           getAllUsers()
-        }
+            users?.pin = encryptedPIN
     }
 
     /**
      * Função que trata da mensagem
      */
     fun changeMessage(uin: Int, message: String) {
-        val users = getAllUsers()
-        if (users.any { it.uin == uin }) {
-            users[uin].message = message
+        val users = users
+        if (users.any { it.value.uin == uin }) {
+            users[uin]?.message = message
             if (message != "") {
-                println("The message \"$message\" has been associated to $uin:${users[uin].name}")
+                println("The message \"$message\" has been associated to $uin:${users[uin]?.name}")
             }
         } else {
             println("Utilizador não encontrado. UIN: $uin")
@@ -70,8 +64,8 @@ class Users(private val maxSize: Int = MAX_USERS) {
      */
 
     private fun generateUIN(): Int {
-        val users = getAllUsers()
-        val assignedUin = HashSet(users.map { it.uin })
+        val users = users
+        val assignedUin = HashSet(users.map { it.value.uin})
         val availableUin = (0..MAX_USERS).filterNot { assignedUin.contains(it) }
         if (availableUin.isNotEmpty())
             return availableUin.first()
@@ -96,9 +90,8 @@ class Users(private val maxSize: Int = MAX_USERS) {
      * Função que autentica o utilizador
      */
     fun authenticateUser(uin: String, pin: String): User? {
-        val list = Users().getAllUsers()
-        return list
-            .firstOrNull { user -> user.uin == uin.toInt() && user.pin == Users().encryptPIN(pin) }
+        return  users.values.firstOrNull { user -> user.uin == uin.toInt() && user.pin == Users().encryptPIN(pin) }
+
     }
 
     /**

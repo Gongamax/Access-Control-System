@@ -16,6 +16,7 @@ object App {
         TUI.init()
         TUI.writeString("Initializing..", 0, center = true)
         TUI.writeString("Wait Please...", 1, center = true)
+        USERS.getAllUsers()
         while (!DoorMechanism.finished()) {
             Thread.sleep(1)
         }
@@ -178,15 +179,13 @@ object App {
         val rPin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
         TUI.clearLCD()
         if (pin == rPin && pin != KBD.NONE.toString()) {
-            USERS.changePin(uin, pin, true)
-            TUI.writeString("PIN has been", 0, center =true)
-            TUI.writeString("changed", 1, center = true)
+            USERS.changePin(uin, pin)
+            TUI.writeBigString("PIN has been changed", 0, center =true)
             activeWait(2000)
             return
         } else {
-            USERS.changePin(uin, pin, false)
-            TUI.writeString("PIN has been", 0, center =true)
-            TUI.writeString("helded", 1, center = true)
+            TUI.writeBigString("PIN has been helded", 0, center =true)
+            //TUI.writeString("helded", 1, center = true)
             activeWait(2000)
         }
     }

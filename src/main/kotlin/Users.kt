@@ -2,7 +2,7 @@ import java.security.MessageDigest
 
 data class User(val uin: Int, val name: String, var pin: String, var message : String = "")
 
-const val MAX_USERS = 100
+const val MAX_USERS = 1000
 
 class Users(private val maxSize: Int = MAX_USERS) {
 

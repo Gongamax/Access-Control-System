@@ -9,6 +9,7 @@ object App {
     private const val DOOR_VELOCITY = 0x01
     private val USERS = Users()
     private val LOG = Log()
+
     private enum class Manut { NEW, DEL, MSG, OFF }
 
     fun init() {
@@ -23,17 +24,21 @@ object App {
 
     }
 
+
     fun use() {
         while (true) {
             TUI.clearLCD()
+            Maintenance.init()
             val formatDate = SimpleDateFormat("dd/MM/yyyy HH:mm")
             val calendar = Calendar.getInstance()
             val currDate = formatDate.format(calendar.time)
             TUI.writeString(currDate, 0)
             lateinit var uin: String
             do {
+                if (Maintenance.isMaintenance()) {
+                    modeMaintenance()
+                }
                 uin = TUI.writeAndReadString("UIN:", 3, 1)
-                modeMaintenance()
             } while (uin == KBD.NONE.toString())
             activeWait(500)
             val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
@@ -56,46 +61,46 @@ object App {
     }
 
     private fun modeMaintenance() {
-        Maintenance.init()
-        if (Maintenance.isMaintenance()) {
-            TUI.writeString("Out of Service", 0, center = true)
-            TUI.writeString("Wait", 1, center = true)
-            println("Turn M key to off, to terminate the maintenance mode.")
-            println("Commands: ${Manut.values().joinToString { "$it" }}.")
-            do {
-                print("Maintenance> ")
-                val command = readln().uppercase().trim()
-                if (!(Manut.values().toList().any { it.name == command }))
-                    println("Invalid command.")
-                else {
-                    when (Manut.valueOf(command)) {
-                        Manut.NEW -> newManutMode()
-                        Manut.DEL -> delManutMode()
-                        Manut.MSG -> msgManutMode()
-                        Manut.OFF -> offManutMode()
-                    }
+        TUI.writeString("Out of Service", 0, center = true)
+        TUI.writeString("Wait", 1, center = true)
+        println("Turn M key to off, to terminate the maintenance mode.")
+        println("Commands: ${Manut.values().joinToString { "$it" }}.")
+        do {
+            print("Maintenance> ")
+            val command = readln().uppercase().trim()
+            if (!(Manut.values().toList().any { it.name == command }))
+                println("Invalid command.")
+            else {
+                when (Manut.valueOf(command)) {
+                    Manut.NEW -> newManutMode()
+                    Manut.DEL -> delManutMode()
+                    Manut.MSG -> msgManutMode()
+                    Manut.OFF -> offManutMode()
                 }
-            } while (command != Manut.OFF.toString())
-        }
+            }
+        } while (command != Manut.OFF.toString() && Maintenance.isMaintenance())
+        Thread.sleep(500)
+        println("Exiting maintenance mode...")
+        use()
     }
 
     private fun newManutMode() {
-        while (true){
+        while (true) {
             print("User name? ")
             val name = readln().trim()
-            if(name.length> 16){
+            if (name.length > 16) {
                 println("The $name has more than 16 chars.")
                 break
-            }else if(name.isEmpty()){
+            } else if (name.isEmpty()) {
                 println("Aborted command.")
                 break
             }
             print("PIN? ")
             val pin = readln().trim()
-            if(pin.length> 4){
+            if (pin.length > 4) {
                 println("The length pf $pin is only of 4 digits.")
                 break
-            } else if(pin.isEmpty()){
+            } else if (pin.isEmpty()) {
                 println("Aborted command.")
                 break
             }
@@ -107,26 +112,27 @@ object App {
     }
 
     private fun delManutMode() {
-        while (true){
+        while (true) {
             print("UIN? ")
             val uin = readln().trim()
-            if( uin.length != 3  ||  !(USERS.getAllUsers().any { it.uin == uin.toInt() })){
+            if (uin.length != 3 || !(USERS.getAllUsers().any { it.uin == uin.toInt() })) {
                 println("Invalid UIN.")
                 break
             }
-            val  name = USERS.getAllUsers().get(uin.toInt()).name
+            val name = USERS.getAllUsers().get(uin.toInt()).name
             print("Y/N? ")
             val answer = readln().trim()
-           if(answer != "Y"){
-               println("Command aborted.")
-               break
-           }
+            if (answer != "Y") {
+                println("Command aborted.")
+                break
+            }
             println("Remove user $uin:$name")
             USERS.removeUser(uin.toInt())
             return
         }
 
     }
+
     private fun offManutMode() {
         TUI.writeString("Shutdown...", 1, center = true)
         Thread.sleep(3000)

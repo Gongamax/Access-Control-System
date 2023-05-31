@@ -33,6 +33,11 @@ class Users(private val maxSize: Int = MAX_USERS) {
         }
     }
 
+   fun verificationUni(uin: String) = users.containsKey(uin.toInt())
+
+    fun nameUser(uin: String) = users[uin.toInt()]?.name
+
+    fun messageUser(uin: String) = users[uin.toInt()]?.message
 
     /**
      * Função que altera o PIN

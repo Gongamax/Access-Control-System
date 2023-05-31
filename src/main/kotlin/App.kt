@@ -112,11 +112,11 @@ object App {
         while (true) {
             print("UIN? ")
             val uin = readln().trim()
-            if (uin.length != 3 || !(USERS.getAllUsers().any { it.uin == uin.toInt() })) {
+            if (uin.length != 3 || !(USERS.verificationUni(uin))) {
                 println("Invalid UIN.")
                 break
             }
-            val name = USERS.getAllUsers()[uin.toInt()].name
+            val name = USERS.nameUser(uin)
             println("Remove user $uin:$name")
             print("Y/N? ")
             val answer = readln().trim()
@@ -141,11 +141,11 @@ object App {
         while (true) {
             print("UIN? ")
             val uin = readln().trim()
-            if (uin.length != 3 || !(USERS.getAllUsers().any { it.uin == uin.toInt() })) {
+            if (uin.length != 3 || !(USERS.verificationUni(uin))) {
                 println("Invalid UIN.")
                 break
             }
-            val message = USERS.getAllUsers().get(uin.toInt()).message
+            val message = USERS.messageUser(uin)
             if (message != "") {
                 println("User has this message: $message")
                 print("Remove this message Y/N? ")
@@ -185,7 +185,6 @@ object App {
             return
         } else {
             TUI.writeBigString("PIN has been helded", 0, center =true)
-            //TUI.writeString("helded", 1, center = true)
             activeWait(2000)
         }
     }

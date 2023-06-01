@@ -36,7 +36,7 @@ object App {
                     modeMaintenance()
                 }
                 uin = TUI.writeAndReadString("UIN:", 3, 1)
-            } while (uin == KBD.NONE.toString() || uin.contains('#' ))
+            } while (uin == KBD.NONE.toString())
             activeWait(500)
             val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
             if (pin == KBD.NONE.toString()) {

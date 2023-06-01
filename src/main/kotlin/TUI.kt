@@ -102,6 +102,7 @@ fun main() {
 //    TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
 //    TUI.clearAndWrite("Hello", 0)
 //    TUI.writeString("Hello", 1, center = true)
+
     TUI.writeBigString("PIN has been held", 0, center = true)
 }
 

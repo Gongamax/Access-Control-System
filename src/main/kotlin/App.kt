@@ -20,9 +20,7 @@ object App {
         while (!DoorMechanism.finished()) {
             Thread.sleep(1)
         }
-
     }
-
 
     fun use() {
         while (true) {
@@ -38,7 +36,7 @@ object App {
                     modeMaintenance()
                 }
                 uin = TUI.writeAndReadString("UIN:", 3, 1)
-            } while (uin == KBD.NONE.toString())
+            } while (uin == KBD.NONE.toString() || uin.contains('#' ))
             activeWait(500)
             val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
             if (pin == KBD.NONE.toString()) {

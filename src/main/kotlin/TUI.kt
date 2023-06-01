@@ -28,7 +28,8 @@ object TUI {
                 if (key == '*') {
                     reset(`?`, line, col + msg.length)
                     string = ""
-                } else {
+                } else if (key == '#') Thread.sleep(1)
+                else {
                     string += key
                     if (encoded) LCD.write('*')
                     else LCD.write(key)

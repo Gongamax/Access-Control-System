@@ -33,9 +33,17 @@ class Users(private val maxSize: Int = MAX_USERS) {
         }
     }
 
+    /**
+     * Função que verifica o UIN
+     */
    fun verificationUni(uin: String) = users.containsKey(uin.toInt())
 
+
+    /**
+     * Função que retorna o nome do utilizador
+     */
     fun nameUser(uin: String) = users[uin.toInt()]?.name
+
 
     fun messageUser(uin: String) = users[uin.toInt()]?.message
 

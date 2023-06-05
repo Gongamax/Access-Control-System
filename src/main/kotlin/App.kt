@@ -205,8 +205,10 @@ object App {
         TUI.clearAndWrite("Hello", 0)
         TUI.writeString(user.name, 1, center = true)
         if (TUI.checkKeyPressed(2000, '#')) changePin(user.uin)
-        if (TUI.checkKeyPressed(2000, '*')) delMessage(user.uin)
-        if (user.message.isNotEmpty()) TUI.writeBigString(user.message, 0)
+        if (user.message.isNotEmpty()) {
+            TUI.writeBigString(user.message, 0)
+            if (TUI.checkKeyPressed(2000, '*')) delMessage(user.uin)
+        }
         Thread.sleep(1000)
         TUI.writeString(user.name, 0, center = true)
     }

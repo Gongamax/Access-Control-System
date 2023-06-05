@@ -1,18 +1,32 @@
 import java.io.*
-import java.lang.StringBuilder
 
 object FileAccess {
 
     fun readTextFile(fileName: String): ArrayList<String> {
         //val output = StringBuilder()
         val ret : ArrayList<String> = ArrayList()
-        val reader = BufferedReader(File(fileName).reader())
-        reader.use {
-            var line = reader.readLine()
-            while (line != null) {
-                //output.append(line)
-                ret.add(line)
-                line = reader.readLine()
+        try {
+            val reader = BufferedReader(File(fileName).reader())
+            reader.use {
+                var line = reader.readLine()
+                while (line != null) {
+                    //output.append(line)
+                    ret.add(line)
+                    line = reader.readLine()
+                }
+            }
+        } catch (e:Exception) {
+            println("Error opening file $fileName")
+            try {
+                val file = File(fileName);
+                if (file.createNewFile()) {
+                    val userFile = FileOutputStream(file)
+                    userFile.close()
+                    println("$fileName file was created, please restart needed")
+                    println("Tip: insert users and corresponding information")
+                } else println("Please check $fileName file")
+            } catch (e: Exception) {
+                println("Error creating $fileName")
             }
         }
         return ret

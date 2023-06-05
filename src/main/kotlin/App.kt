@@ -187,10 +187,25 @@ object App {
         }
     }
 
+    private fun delMessage(uin: Int) {
+        TUI.writeString("Clear Msg.?", 0, center = true)
+        val delete = TUI.readResponse("(Yes=*)", '*', 1)
+        val msg = USERS.messageUser(uin.toString())
+        return if (delete && msg != "") {
+            USERS.changeMessage(uin, "")
+            TUI.clearLCD()
+            TUI.writeBigString("Msg. has been cleared", 0, center = true)
+        } else {
+            TUI.writeBigString("Msg. has been helded", 0, center = true)
+            activeWait(2000)
+        }
+    }
+
     private fun afterLogin(user: User) {
         TUI.clearAndWrite("Hello", 0)
         TUI.writeString(user.name, 1, center = true)
         if (TUI.checkKeyPressed(2000, '#')) changePin(user.uin)
+        if (TUI.checkKeyPressed(2000, '*')) delMessage(user.uin)
         if (user.message.isNotEmpty()) TUI.writeBigString(user.message, 0)
         Thread.sleep(1000)
         TUI.writeString(user.name, 0, center = true)

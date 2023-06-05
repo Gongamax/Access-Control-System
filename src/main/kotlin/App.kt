@@ -4,7 +4,7 @@ import kotlin.system.exitProcess
 
 object App {
 
-    private const val DOOR_VELOCITY = 0x01
+    private const val DOOR_VELOCITY = 0x03
     private val USERS = Users()
     private val LOG = Log()
 

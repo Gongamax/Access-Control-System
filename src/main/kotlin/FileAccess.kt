@@ -22,7 +22,7 @@ object FileAccess {
                 if (file.createNewFile()) {
                     val userFile = FileOutputStream(file)
                     userFile.close()
-                    println("$fileName file was created, please restart needed")
+                    println("$fileName file was created, please restart")
                     println("Tip: insert users and corresponding information")
                 } else println("Please check $fileName file")
             } catch (e: Exception) {

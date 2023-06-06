@@ -206,7 +206,7 @@ object App {
         TUI.writeString(user.name, 1, center = true)
         if (TUI.checkKeyPressed(2000, '#')) changePin(user.uin)
         if (user.message.isNotEmpty()) {
-            TUI.writeBigString(user.message, 0)
+            TUI.writeBigString(user.message, 0,center = true)
             if (TUI.checkKeyPressed(2000, '*')) delMessage(user.uin)
         }
         Thread.sleep(1000)

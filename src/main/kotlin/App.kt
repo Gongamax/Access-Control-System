@@ -37,7 +37,7 @@ object App {
                 }
                 uin = TUI.writeAndReadString("UIN:", 3, 1)
             } while (uin == KBD.NONE.toString())
-            activeWait(500)
+            Thread.sleep(500)
             val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
             if (pin == KBD.NONE.toString()) {
                 TUI.writeString("Login Failed", 1, center = true)
@@ -109,8 +109,8 @@ object App {
     private fun delManutMode() {
         while (true) {
             print("UIN? ")
-            val uin = readln().trim()
-            if (uin.length != 3 || !(USERS.verificationUni(uin))) {
+            val uin = readln().trim().toInt()
+            if (!(USERS.verificationUni(uin))) {
                 println("Invalid UIN.")
                 break
             }
@@ -138,8 +138,8 @@ object App {
     private fun msgManutMode() {
         while (true) {
             print("UIN? ")
-            val uin = readln().trim()
-            if (uin.length != 3 || !(USERS.verificationUni(uin))) {
+            val uin = readln().trim().toInt()
+            if (!(USERS.verificationUni(uin))) {
                 println("Invalid UIN.")
                 break
             }
@@ -178,11 +178,11 @@ object App {
         TUI.clearLCD()
         if (pin == rPin && pin != KBD.NONE.toString()) {
             USERS.changePin(uin, pin)
-            TUI.writeBigString("PIN has been changed", 0, center =true)
+            TUI.writeBigString("PIN has been changed", 0, center = true)
             activeWait(2000)
             return
         } else {
-            TUI.writeBigString("PIN has been helded", 0, center =true)
+            TUI.writeBigString("PIN has been helded", 0, center = true)
             activeWait(2000)
         }
     }
@@ -190,7 +190,7 @@ object App {
     private fun delMessage(uin: Int) {
         TUI.writeString("Clear Msg.?", 0, center = true)
         val delete = TUI.readResponse("(Yes=*)", '*', 1)
-        val msg = USERS.messageUser(uin.toString())
+        val msg = USERS.messageUser(uin)
         return if (delete && msg != "") {
             USERS.changeMessage(uin, "")
             TUI.clearLCD()
@@ -206,7 +206,7 @@ object App {
         TUI.writeString(user.name, 1, center = true)
         if (TUI.checkKeyPressed(2000, '#')) changePin(user.uin)
         if (user.message.isNotEmpty()) {
-            TUI.writeBigString(user.message, 0,center = true)
+            TUI.writeBigString(user.message, 0, center = true)
             if (TUI.checkKeyPressed(2000, '*')) delMessage(user.uin)
         }
         Thread.sleep(1000)

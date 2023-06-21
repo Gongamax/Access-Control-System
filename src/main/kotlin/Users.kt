@@ -90,7 +90,7 @@ class Users(private val maxSize: Int = MAX_USERS) {
      * Função que obtem todos os utilizadores
      */
     fun getAllUsers(): List<User> {
-        FileAccess.readTextFile("MY_USERS.txt").forEach {
+        FileAccess.readTextFile("USERS.txt").forEach {
             if (it.isEmpty()) return@forEach
             val (uin, pin, name, message) = it.split(";")
             val user = User(uin.toInt(), name, pin, message)

@@ -110,7 +110,7 @@ object App {
         while (true) {
             print("UIN? ")
             val uin = readln().trim().toInt()
-            if (!(USERS.verificationUni(uin))) {
+            if (!(USERS.verificationUin(uin))) {
                 println("Invalid UIN.")
                 break
             }
@@ -139,7 +139,7 @@ object App {
         while (true) {
             print("UIN? ")
             val uin = readln().trim().toInt()
-            if (!(USERS.verificationUni(uin))) {
+            if (!(USERS.verificationUin(uin))) {
                 println("Invalid UIN.")
                 break
             }

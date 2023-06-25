@@ -35,7 +35,7 @@ object TUI {
                     else LCD.write(key)
                 }
             } else return KBD.NONE.toString()
-        } while (string.length < nameLength && string != `?`)
+        } while (string.length < nameLength)
 
         return string
     }

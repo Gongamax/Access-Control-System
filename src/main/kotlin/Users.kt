@@ -27,7 +27,7 @@ class Users(private val maxSize: Int = MAX_USERS) {
      */
     fun removeUser(uin: Int) {
         val name = users[uin]?.name
-        if (users.containsKey(uin)){
+        if (users.containsKey(uin)) {
             users.remove(uin)
             println("User $uin:$name removed")
         }
@@ -36,7 +36,7 @@ class Users(private val maxSize: Int = MAX_USERS) {
     /**
      * Função que verifica o UIN
      */
-   fun verificationUni(uin: Int) = users.containsKey(uin)
+    fun verificationUin(uin: Int) = users.containsKey(uin)
 
 
     /**
@@ -52,8 +52,8 @@ class Users(private val maxSize: Int = MAX_USERS) {
      */
     fun changePin(uin: Int, newPin: String) {
         val users = users[uin]
-            val encryptedPIN = encryptPIN(newPin)
-            users?.pin = encryptedPIN
+        val encryptedPIN = encryptPIN(newPin)
+        users?.pin = encryptedPIN
     }
 
     /**
@@ -78,7 +78,7 @@ class Users(private val maxSize: Int = MAX_USERS) {
 
     private fun generateUIN(): Int {
         val users = users
-        val assignedUin = HashSet(users.map { it.value.uin})
+        val assignedUin = HashSet(users.map { it.value.uin })
         val availableUin = (0..MAX_USERS).filterNot { assignedUin.contains(it) }
         if (availableUin.isNotEmpty())
             return availableUin.first()
@@ -102,10 +102,9 @@ class Users(private val maxSize: Int = MAX_USERS) {
     /**
      * Função que autentica o utilizador
      */
-    fun authenticateUser(uin: String, pin: String): User? {
-        return  users.values.firstOrNull { user -> user.uin == uin.toInt() && user.pin == Users().encryptPIN(pin) }
+    fun authenticateUser(uin: String, pin: String): User? =
+        users.values.firstOrNull { user -> user.uin == uin.toInt() && user.pin == Users().encryptPIN(pin) }
 
-    }
 
     /**
      * Função que obtem o utilizador
@@ -122,7 +121,7 @@ class Users(private val maxSize: Int = MAX_USERS) {
     /**
      * Função que encripta o PIN
      */
-    fun encryptPIN(pin: String): String {
+    private fun encryptPIN(pin: String): String {
         val md = MessageDigest.getInstance("SHA-256")
         val hashedBytes = md.digest(pin.toByteArray())
         return hashedBytes.joinToString("") { "%02x".format(it) }

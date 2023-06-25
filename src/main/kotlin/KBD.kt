@@ -51,8 +51,7 @@ fun main() {
     KBD.init()
     while (true) {
         val key = KBD.waitKey(2000)
-        if (key != KBD.NONE) print("$key")
-        else print("NONE")
+        if (key != KBD.NONE) println("$key")
         Thread.sleep(100)
     }
 }

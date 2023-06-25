@@ -5,7 +5,7 @@ const val M = 0x40
 object Maintenance {
     fun init() {
         HAL.init() // Iniciar a classe HAL
-        clrBits(M) // ATIVAR O M
+        clrBits(M) // Desativar o  M inicialmente
     }
     fun isMaintenance() = HAL.isBit(M)
 

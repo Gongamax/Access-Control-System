@@ -2,6 +2,7 @@ import LCD.init
 import kotlin.math.E
 import SerialEmmiter.Destination.*
 import SerialEmmiter.send
+import isel.leic.utils.Time
 
 // Escreve no LCD usando a interface a 4 bits.
 object LCD {
@@ -37,6 +38,7 @@ object LCD {
             (data shl 1) or 0x01
         )  //rs será o bit de maior peso nos 5 bits de parametro
         else send(SerialEmmiter.Destination.LCD, data shl 1)
+        Time.sleep(2)
     }
 
     // Escreve um nibble de comando/dados no LCD
@@ -114,9 +116,7 @@ object LCD {
 }
 
 fun main() {
-    init()
-    LCD.write("Hello World!")
-    LCD.cursor(1, 0)
-    LCD.write("Hello World!")
+        init()
+        LCD.write("BENFICA")
 
 }

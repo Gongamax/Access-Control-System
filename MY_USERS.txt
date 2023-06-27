@@ -1,1 +1,7 @@
-0;edee29f882543b956620b26d0ee0e7e950399b1c4222f5de05e06425b4c995e9;Connor McGregor;;
+0;182;Alan Turing;Turing machine is ready;
+1;1124;ZE;SIGA;
+2;0;Maurice Karnaugh;Simplification is possible;
+3;0;John von Neumann;;
+4;1124;Francisco;;
+5;1249;Maria;Welcome, Sra. Maria;
+6;0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c;Rita;Welcome, Rita;

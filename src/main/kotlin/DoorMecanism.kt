@@ -4,6 +4,7 @@ import SerialEmmiter.isBusy
 object DoorMechanism { // Controla o estado do mecanismo de abertura da porta.
     // Inicia a classe, estabelecendo os valores iniciais.
     fun init() {
+
         SerialEmmiter.init()
     }
 

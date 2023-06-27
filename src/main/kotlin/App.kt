@@ -110,7 +110,7 @@ object App {
         while (true) {
             print("UIN? ")
             val uin = readln().trim().toInt()
-            if (!(USERS.verificationUni(uin))) {
+            if (!(USERS.verificationUin(uin))) {
                 println("Invalid UIN.")
                 break
             }
@@ -122,7 +122,7 @@ object App {
                 println("Command aborted.")
                 break
             }
-            USERS.removeUser(uin.toInt())
+            USERS.removeUser(uin)
             return
         }
 
@@ -139,7 +139,7 @@ object App {
         while (true) {
             print("UIN? ")
             val uin = readln().trim().toInt()
-            if (!(USERS.verificationUni(uin))) {
+            if (!(USERS.verificationUin(uin))) {
                 println("Invalid UIN.")
                 break
             }
@@ -154,12 +154,12 @@ object App {
                 }
                 print("Message? ")
                 val m = readln()
-                USERS.changeMessage(uin.toInt(), m)
+                USERS.changeMessage(uin, m)
                 break
             } else {
                 print("Message? ")
                 val m = readln()
-                USERS.changeMessage(uin.toInt(), m)
+                USERS.changeMessage(uin, m)
                 break
             }
         }

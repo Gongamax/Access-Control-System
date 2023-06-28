@@ -23,7 +23,7 @@ object App {
     }
 
     fun  use() {
-        while (true) {
+        useLoop@ while (true) {
             TUI.clearLCD()
             Maintenance.init()
             val formatDate = SimpleDateFormat("dd/MM/yyyy HH:mm")
@@ -34,6 +34,7 @@ object App {
             do {
                 if (Maintenance.isMaintenance()) {
                     modeMaintenance()
+                    continue@useLoop
                 }
                 uin = TUI.writeAndReadString("UIN:", 3, 1)
             } while (uin == TUI.NONE)
@@ -42,7 +43,7 @@ object App {
             if (pin == TUI.NONE) {
                 TUI.writeString("Login Failed", 1, center = true)
                 activeWait(3000)
-                use()
+                continue@useLoop
             }
             Thread.sleep(500)
             val user = USERS.authenticateUser(uin, pin)
@@ -78,7 +79,7 @@ object App {
         } while (command != Manut.OFF.toString() && Maintenance.isMaintenance())
         Thread.sleep(500)
         println("Exiting maintenance mode...")
-        use()
+        return
     }
 
     private fun newManutMode() {

@@ -38,7 +38,7 @@ object LCD {
         if (rs) send(SerialEmmiter.Destination.LCD, (data shl 1) or 0x01
         )  //rs será o bit de maior peso nos 5 bits de parametro
         else send(SerialEmmiter.Destination.LCD, data shl 1)
-        Time.sleep(2)
+        Time.sleep(1)
     }
 
     // Escreve um nibble de comando/dados no LCD

@@ -4,6 +4,8 @@ object TUI {
 
     private const val LCD_LENGTH = 16
 
+    val NONE get() = KBD.NONE.toString()
+
     fun init() {
         LCD.init()
         KBD.init()
@@ -26,7 +28,11 @@ object TUI {
         do {
             val key = KBD.waitKey(5000)
             if (key != KBD.NONE) {
-                if (key == '*') {
+                if(key == '*' && string.isEmpty()){
+                    string = NONE
+                    break
+                }
+                else if (key == '*') {
                     reset(`?`, line, col + msg.length)
                     string = ""
                 } else if (key == '#') Thread.sleep(1)
@@ -35,7 +41,7 @@ object TUI {
                     if (encoded) LCD.write('*')
                     else LCD.write(key)
                 }
-            } else return KBD.NONE.toString()
+            } else return NONE
         } while (string.length < nameLength)
 
         return string

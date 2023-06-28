@@ -22,7 +22,7 @@ object App {
         }
     }
 
-    fun use() {
+    fun  use() {
         while (true) {
             TUI.clearLCD()
             Maintenance.init()
@@ -36,10 +36,10 @@ object App {
                     modeMaintenance()
                 }
                 uin = TUI.writeAndReadString("UIN:", 3, 1)
-            } while (uin == KBD.NONE.toString())
+            } while (uin == TUI.NONE)
             Thread.sleep(500)
             val pin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
-            if (pin == KBD.NONE.toString()) {
+            if (pin == TUI.NONE) {
                 TUI.writeString("Login Failed", 1, center = true)
                 activeWait(3000)
                 use()
@@ -176,7 +176,7 @@ object App {
         TUI.writeString("Re-insert New", 0, center = true)
         val rPin = TUI.writeAndReadString("PIN:", 4, 1, encoded = true)
         TUI.clearLCD()
-        if (pin == rPin && pin != KBD.NONE.toString()) {
+        if (pin == rPin && pin != TUI.NONE) {
             USERS.changePin(uin, pin)
             TUI.writeBigString("PIN has been changed", 0, center = true)
             activeWait(2000)

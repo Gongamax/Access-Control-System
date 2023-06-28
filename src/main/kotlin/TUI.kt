@@ -16,6 +16,7 @@ object TUI {
         col: Int = 0,
         encoded: Boolean = false,
     ): String {
+        LCD.showCursor()
         LCD.cursor(line, col)
         LCD.write(msg)
         var string = ""
@@ -94,7 +95,7 @@ object TUI {
         clearCursor(col + msg.length)
     }
 
-    private fun clearCursor(col: Int = 0) = LCD.write(" ".repeat(abs(LCD_LENGTH - col)))
+    private fun clearCursor(col: Int = 0) = LCD.clearCursor()//LCD.write(" ".repeat(abs(LCD_LENGTH - col)))
 }
 
 fun main() {

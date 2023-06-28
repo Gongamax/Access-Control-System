@@ -10,6 +10,8 @@ object LCD {
     private const val LINES = 2
     private const val COLS = 16; // Dimensão do display.
     private const val CLEAR_DISPLAY = 0x01
+    private const val CLEAR_CURSOR = 0x0C
+    private const val SHOW_CURSOR = 0x0F
     private const val MASK_ENABLE = 0x20
     private const val MASK_RS = 0x10
 
@@ -33,9 +35,7 @@ object LCD {
 
     // Escreve um nibble de comando/dados no LCD em série
     private fun writeNibbleSerial(rs: Boolean, data: Int) {
-        if (rs) send(
-            SerialEmmiter.Destination.LCD,
-            (data shl 1) or 0x01
+        if (rs) send(SerialEmmiter.Destination.LCD, (data shl 1) or 0x01
         )  //rs será o bit de maior peso nos 5 bits de parametro
         else send(SerialEmmiter.Destination.LCD, data shl 1)
         Time.sleep(2)
@@ -112,6 +112,14 @@ object LCD {
     // Envia comando para limpar o ecrã e posicionar o cursor em (0,0)
     fun clear() {
         writeCMD(CLEAR_DISPLAY)
+    }
+
+    fun clearCursor() {
+        writeCMD(CLEAR_CURSOR)
+    }
+
+    fun showCursor() {
+        writeCMD(SHOW_CURSOR)
     }
 }
 

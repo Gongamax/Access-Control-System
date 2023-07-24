@@ -1,0 +1,35 @@
+transcript on
+if {[file exists rtl_work]} {
+	vdel -lib rtl_work -all
+}
+vlib rtl_work
+vmap work rtl_work
+
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/Adder.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/HA.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/KeyScan.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/MUX.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/FFD.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/FA.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/KeyControl.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/CLKDIV.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/Counter.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/Decoder.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/REGIST.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/KeyDecode.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/KeyBoardReader.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/PENC.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/Counter3bits.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/Reg3Bit.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/Adder3Bit.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/RingBufferControl.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/Adder4Bit.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/Counter4Bit.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/BufferControl.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/RAM.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/RingBuffer.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/MAC.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/MUX_2x1.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/OutputBuffer.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/OutputRegister.vhd}
+

@@ -1,0 +1,61 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity SerialReceiver is
+port(
+--Input ports
+		SDX 		: in std_logic;
+		SCLK	 	: in  std_logic;
+		nSS 		: in std_logic;
+--Output ports
+		D			: out std_logic_vector(4 downto 0);
+		DXval 	: out std_logic
+);
+end SerialReceiver;
+
+architecture structural of SerialReceiver is
+
+component Shift_Register is
+Port ( 
+		clk : in  std_logic;
+       D : in  std_logic;
+       RESET: in std_logic;
+       SET: in std_logic;
+       enable : in std_logic;
+       Q : out std_logic_vector(4 downto 0)
+ );
+end component;
+
+component Counter3bits is
+PORT(
+-- Input ports
+		CE : in std_logic;
+		CLK : in std_logic;
+		RESET: in std_logic;
+-- Output ports
+		Q: out std_logic_vector (2 downto 0)
+);    
+end component;
+    
+component SerialControl is
+Port(
+--Input ports
+     enRx		: in std_logic;
+	  accept		: in std_logic;
+     eq5 		: in std_logic;
+	  clk			: in std_logic;
+	  reset		: in std_logic;
+--Output ports
+	  clr 	   : out std_logic;
+	  wr		  	: out std_logic;
+	  DXval		: out std_logic
+);
+end component;
+
+--signals
+signal SS : std_logic;
+signal wr_enable : std_logic;
+
+begin
+U0: Shift_Register port map(clk => SCLK, D => SDX, RESET => RESET, SET => SET, enable => wr_enable, Q => D);
+U1: Counter3bits port map()

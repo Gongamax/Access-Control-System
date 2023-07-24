@@ -1,0 +1,71 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity DoorController is 
+Port(--Input ports
+     Dval		: in std_logic;
+	  Din0_4		: in std_logic_vector(4 downto 0);
+     Sclose		: in std_logic;
+	  Sopen		: in std_logic;
+	  Psensor	: in std_logic;
+	  --Output ports
+	  OnnOff	   : out std_logic;
+	  OpenClose	: out std_logic;
+	  v0_3	  	: out std_logic_vector(3 downto 0);
+	  done		: out std_logic
+);
+	  
+end DoorController;
+
+architecture behavioral of DoorController is
+
+type State is (Received, Open_door, Close_door, isDone);
+
+signal CurrentState, NextState : State;
+
+begin
+CurrentState <= Not_started when reset = '1' else NextState when rising_edge(clk);
+
+--Progress to next state
+GenerateNextState:
+process (CurrentState, Dval, Din0_4, Sclose, Sopen, Psensor)
+	begin
+		case CurrentState is
+			when Received	=> if (Dval = '1' and Din0_4(0) = '1') then
+										NextState <= Open_door;
+									else if (Dval = '1' and Din0_4(0) = '0')
+										NextState <= Close_door;
+									else
+										NextState <= Received;
+									end if;
+										
+			when Open_door	=> if (Sopen = '1' and Din0_4(0) = '1') then
+										NextState <= isDone;
+									else if (Sopen = '1' and Din0_4(0) = '0')
+										NextState <= Close_door;
+									else
+										NextState <= Open_door;
+									end if;
+								
+			when Close_door => if (Psensor = '1') then 
+											NextState <= Open_door;
+										else if (Sclose = '1') 
+											NextState <= isDone;
+										else 
+											NextState <= Close_door;
+										end if;
+										
+			when isDone => if (Dval = '0') then
+									NextState <= Received;
+								else
+									NextState <= isDone;
+								end if;
+		end case;
+	end process;
+	
+--Output values
+OnnOff <= '1' when (CurrentState = Open_door) else '0';
+done <= '1' when (CurrentState = isDone) else '0';
+Dout0_4 <= Din0_4;
+
+end behavioral;

@@ -1,0 +1,18 @@
+set_location_assignment PIN_W8     -to LCD_RS
+set_location_assignment PIN_V5     -to LCD_E
+
+set_location_assignment PIN_P11 -to Mclk
+set_location_assignment PIN_C10 -to Reset
+
+set_location_assignment PIN_W11    -to LCD_DATA[0]
+set_location_assignment PIN_AA10   -to LCD_DATA[1]
+set_location_assignment PIN_Y8     -to LCD_DATA[2]
+set_location_assignment PIN_Y7     -to LCD_DATA[3]
+
+set_location_assignment PIN_W5     -to Lines[0]
+set_location_assignment PIN_AA14   -to	Lines[1]
+set_location_assignment PIN_W12    -to Lines[2]
+set_location_assignment PIN_AB12   -to	Lines[3]
+set_location_assignment PIN_AB11   -to	Columns[0]
+set_location_assignment PIN_AB10   -to	Columns[1]
+set_location_assignment PIN_AA9    -to	Columns[2]

@@ -1,0 +1,25 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Subtractor3Bit is
+    port (
+        A, B : in std_logic_vector(2 downto 0);
+        Difference : out std_logic_vector(2 downto 0)
+    );
+end Subtractor3Bit;
+
+architecture Behavioral of Subtractor3Bit is
+    component Counter3Bit is
+        PORT(
+            CE : in std_logic;
+            CLK : in std_logic;
+            clr: in std_logic;
+            Q: out std_logic_vector(2 downto 0)
+        );
+    end component;
+
+    signal CounterValue : std_logic_vector(2 downto 0);
+begin
+    Counter: Counter3Bit port map (CE => '1', CLK => '1', clr => '0', Q => CounterValue);
+    Difference <= A xor B xor CounterValue;
+end Behavioral;

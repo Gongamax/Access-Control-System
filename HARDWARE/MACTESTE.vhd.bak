@@ -1,0 +1,71 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity MAC is 
+Port(
+    -- Input ports
+    putget    : in std_logic;
+    incPut    : in std_logic;
+    incGet    : in std_logic;
+    clk       : in std_logic;
+    Reset     : in std_logic;
+    -- Output ports
+    Address   : out std_logic_vector(3 downto 0);
+    full      : out std_logic;
+    empty     : out std_logic
+);
+end MAC;
+
+architecture structural of MAC is
+
+component MUX_2x1 is
+port(
+    -- Input ports
+    A, B: in std_logic_vector(3 downto 0);
+    S: in std_logic;
+    -- Output ports
+    Y: out std_logic_vector(3 downto 0)
+);
+end component;
+
+component Subtractor4Bit is
+port(
+    -- Input ports
+    A, B: in std_logic_vector(3 downto 0);
+    -- Output ports
+    Result: out std_logic_vector(3 downto 0);
+    Empty: out std_logic;
+    Full: out std_logic
+);
+end component;
+
+
+component Counter4BitTeste is
+    PORT(
+        -- Input ports
+        CE : in std_logic;
+        CLK : in std_logic;
+        clr : in std_logic;
+        UpDown : in std_logic;
+        -- Output ports
+        Q : out std_logic_vector (3 downto 0)
+    );
+end component;
+
+-- Signals
+signal Ax : std_logic_vector(3 downto 0);
+signal Bx : std_logic_vector(3 downto 0);
+signal e : std_logic;
+signal f : std_logic;
+signal ctrl : std_logic; -- Control signal for controlling the direction
+
+begin
+    idxPut: Counter4BitTeste port map (CE => incPut, CLK => clk, clr => Reset, UpDown => '0', Q => Ax);
+    idxGet: Counter4BitTeste port map (CE => incGet, CLK => clk, clr => Reset, UpDown => '0', Q => Bx);
+    Mux_putandget: MUX_2x1 port map (A => Bx, B => Ax, Y => Address, S => putget);
+    Sub: Subtractor4Bit port map (A => Ax, B => Bx, Result => Address, Empty => e, Full => f);
+
+    ctrl <= incPut xor incGet;
+    empty <= e;
+    full <= f;
+end structural;

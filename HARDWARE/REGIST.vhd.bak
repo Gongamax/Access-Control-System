@@ -1,0 +1,36 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity REGIST is
+PORT(-- Intput ports
+		D:in std_logic_vector(3 downto 0);
+		CLK: in std_logic;
+		RESET: in std_logic;
+		SET: in std_logic;
+		CE: in std_logic;
+	  -- Output ports
+		Q: out std_logic_vector(3 downto 0));
+end REGIST;
+
+architecture structural of REGIST is
+
+component FFD is
+PORT(-- Intput ports
+		CLK : in std_logic;
+		RESET : in std_logic;
+		SET : in std_logic;
+		D : in std_logic;
+		EN : in std_logic;
+    -- Output ports
+		Q : out std_logic);
+end component;
+
+
+signal Qs: std_logic_vector(3 downto 0);
+begin
+U0: 	FFD port map (CLK=> CLK,RESET=>RESET, EN=>CE,SET=>SET, D=>D(3),Q=>Qs(3));
+U1:	FFD port map (CLK=> CLK,RESET=>RESET, EN=>CE,SET=>SET, D=>D(2),Q=>Qs(2));
+U2:	FFD port map (CLK=> CLK,RESET=>RESET, EN=>CE,SET=>SET, D=>D(1),Q=>Qs(1));
+U3:	FFD port map (CLK=> CLK,RESET=>RESET, EN=>CE,SET=>SET, D=>D(0),Q=>Qs(0));
+Q<= Qs;
+end structural;

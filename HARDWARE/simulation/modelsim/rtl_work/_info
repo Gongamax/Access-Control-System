@@ -1,0 +1,423 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/simulation/modelsim
+Eadder3bit
+Z1 w1680606427
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 6
+R0
+Z4 8C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Adder3Bit.vhd
+Z5 FC:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Adder3Bit.vhd
+l0
+L4 1
+VG3g6?d4]66J3S5:2zBi<=3
+!s100 0OVFKj^[RjmaAh3gUd47=0
+Z6 OV;C;2020.1;71
+31
+Z7 !s110 1687612764
+!i10b 1
+Z8 !s108 1687612764.000000
+Z9 !s90 -reportprogress|300|-93|-work|work|C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Adder3Bit.vhd|
+Z10 !s107 C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Adder3Bit.vhd|
+!i113 1
+Z11 o-93 -work work
+Z12 tExplicit 1 CvgOpt 0
+Astructural
+R2
+R3
+DEx4 work 9 adder3bit 0 22 G3g6?d4]66J3S5:2zBi<=3
+!i122 6
+l27
+L14 19
+Voc7QKOBdL[Zl=Ea50^@fe1
+!s100 Db1BjWlb_U<Bmn6zFn:OX2
+R6
+31
+R7
+!i10b 1
+R8
+R9
+R10
+!i113 1
+R11
+R12
+Ecounter3bit
+Z13 w1680606858
+R2
+R3
+!i122 4
+R0
+Z14 8C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Counter3bits.vhd
+Z15 FC:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Counter3bits.vhd
+l0
+L4 1
+VPPHYTzY1azi1o7:@`OikO3
+!s100 jYCH@S<Y@T:B5@IY1g89F0
+R6
+31
+R7
+!i10b 1
+R8
+Z16 !s90 -reportprogress|300|-93|-work|work|C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Counter3bits.vhd|
+Z17 !s107 C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Counter3bits.vhd|
+!i113 1
+R11
+R12
+Astructural
+R2
+R3
+DEx4 work 11 counter3bit 0 22 PPHYTzY1azi1o7:@`OikO3
+!i122 4
+l44
+L14 38
+VXmWe<=5PnjIGHZ8Y14VKD2
+!s100 EM;a[c]^:1Xe];g]RZWiK1
+R6
+31
+R7
+!i10b 1
+R8
+R16
+R17
+!i113 1
+R11
+R12
+Efa
+Z18 w1686958720
+R2
+R3
+!i122 3
+R0
+Z19 8C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FA.vhd
+Z20 FC:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FA.vhd
+l0
+L4 1
+V509RjfX6WA[EMkY_n]R]`0
+!s100 5UE^h8eIAU2QmQ3kc_G_a1
+R6
+31
+R7
+!i10b 1
+R8
+Z21 !s90 -reportprogress|300|-93|-work|work|C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FA.vhd|
+Z22 !s107 C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FA.vhd|
+!i113 1
+R11
+R12
+Astructural
+R2
+R3
+DEx4 work 2 fa 0 22 509RjfX6WA[EMkY_n]R]`0
+!i122 3
+l27
+L14 22
+VSg68ACa9oZ@;g]jK=:8V`2
+!s100 >0_K@ZM=?7bc:cP@=WPLF2
+R6
+31
+R7
+!i10b 1
+R8
+R21
+R22
+!i113 1
+R11
+R12
+Effd
+Z23 w1678651186
+R2
+R3
+!i122 2
+R0
+Z24 8C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FFD.vhd
+Z25 FC:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FFD.vhd
+l0
+L4 1
+V9NiC9ahLW>F@QD4>;g0El3
+!s100 SUKS:`UWTYi0h7E>g]jaP2
+R6
+31
+R7
+!i10b 1
+R8
+Z26 !s90 -reportprogress|300|-93|-work|work|C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FFD.vhd|
+Z27 !s107 C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FFD.vhd|
+!i113 1
+R11
+R12
+Alogicfunction
+R2
+R3
+DEx4 work 3 ffd 0 22 9NiC9ahLW>F@QD4>;g0El3
+!i122 2
+l17
+L15 9
+VPY`:zP>o5SB01c?WocheK1
+!s100 DB6mHj?hXM>[KWbPc9Rz@0
+R6
+31
+R7
+!i10b 1
+R8
+R26
+R27
+!i113 1
+R11
+R12
+Eha
+Z28 w1678651206
+R2
+R3
+!i122 0
+R0
+Z29 8C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/HA.vhd
+Z30 FC:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/HA.vhd
+l0
+L4 1
+V[_agOMPSg0?[9bUhbWYUO0
+!s100 :MLP3lHN436]j^3aO;jio2
+R6
+31
+R7
+!i10b 1
+R8
+Z31 !s90 -reportprogress|300|-93|-work|work|C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/HA.vhd|
+Z32 !s107 C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/HA.vhd|
+!i113 1
+R11
+R12
+Astructural
+R2
+R3
+DEx4 work 2 ha 0 22 [_agOMPSg0?[9bUhbWYUO0
+!i122 0
+l14
+Z33 L13 7
+VGjj;4lR`=dFl8z=?Eo5CT0
+!s100 n?FISBAS6AcYeY@DhHljR2
+R6
+31
+R7
+!i10b 1
+R8
+R31
+R32
+!i113 1
+R11
+R12
+Emac
+Z34 w1687612617
+R2
+R3
+!i122 7
+R0
+Z35 8C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MAC.vhd
+Z36 FC:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MAC.vhd
+l0
+L4 1
+VF9QMZ>:bKhJ5Md>N6FBJl1
+!s100 gW=HeE]DkaAU;MH>g5k2K0
+R6
+31
+R7
+!i10b 1
+R8
+Z37 !s90 -reportprogress|300|-93|-work|work|C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MAC.vhd|
+Z38 !s107 C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MAC.vhd|
+!i113 1
+R11
+R12
+Astructural
+R2
+R3
+DEx4 work 3 mac 0 22 F9QMZ>:bKhJ5Md>N6FBJl1
+!i122 7
+l68
+L19 71
+V3lT=e@j>P5e0ZPgZdAzZo3
+!s100 oUMY9<^TL:[oNW2:<mn9]1
+R6
+31
+R7
+!i10b 1
+R8
+R37
+R38
+!i113 1
+R11
+R12
+Emac_tb
+Z39 w1687093982
+Z40 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+R2
+R3
+!i122 9
+R0
+Z41 8C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Test_Bench/MAC_TB.vhd
+Z42 FC:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Test_Bench/MAC_TB.vhd
+l0
+L5 1
+VD2LzNogO7gXgR5DViIG5z1
+!s100 gGOCQnT:026mh1JdCLgGe0
+R6
+32
+Z43 !s110 1687612782
+!i10b 1
+Z44 !s108 1687612782.000000
+Z45 !s90 -reportprogress|300|-work|work|C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Test_Bench/MAC_TB.vhd|
+!s107 C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Test_Bench/MAC_TB.vhd|
+!i113 1
+Z46 o-work work
+R12
+Abehavioral
+R40
+R2
+R3
+DEx4 work 6 mac_tb 0 22 D2LzNogO7gXgR5DViIG5z1
+!i122 9
+l32
+L8 133
+Vm;CDo^bCE08KNkLPUNE>R0
+!s100 ^9lKhVP?CW9Qd66mVT_Do1
+R6
+32
+R43
+!i10b 1
+R44
+R45
+Z47 !s107 C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Test_Bench/MAC_TB.vhd|
+!i113 1
+R46
+R12
+Emux
+Z48 w1684227119
+R2
+R3
+!i122 1
+R0
+Z49 8C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MUX.vhd
+Z50 FC:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MUX.vhd
+l0
+L3 1
+VBPbI1J:136Vd58>mV?EDR0
+!s100 DGPGUcHj@Z6FO?k8lFNI:1
+R6
+31
+R7
+!i10b 1
+R8
+Z51 !s90 -reportprogress|300|-93|-work|work|C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MUX.vhd|
+Z52 !s107 C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MUX.vhd|
+!i113 1
+R11
+R12
+Abehavioral
+R2
+R3
+DEx4 work 3 mux 0 22 BPbI1J:136Vd58>mV?EDR0
+!i122 1
+l14
+R33
+V[hz9_UUk<4d1boX<ma=ma0
+!s100 ??][NdFFCh;HX94>SX4670
+R6
+31
+R7
+!i10b 1
+R8
+R51
+R52
+!i113 1
+R11
+R12
+Ereg3bit
+Z53 w1680606396
+R2
+R3
+!i122 5
+R0
+Z54 8C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Reg3Bit.vhd
+Z55 FC:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Reg3Bit.vhd
+l0
+L4 1
+V[R1KF3=@N?zWiIb1kHL8H2
+!s100 i<0Ec<AOzhZj5nXaWmUAG2
+R6
+31
+R7
+!i10b 1
+R8
+Z56 !s90 -reportprogress|300|-93|-work|work|C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Reg3Bit.vhd|
+Z57 !s107 C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Reg3Bit.vhd|
+!i113 1
+R11
+R12
+Astructural
+R2
+R3
+DEx4 work 7 reg3bit 0 22 [R1KF3=@N?zWiIb1kHL8H2
+!i122 5
+l30
+L15 22
+VGHQe9]KzH@ZogDL`>h3bH2
+!s100 Ue@V`bZ50k6QkDPzG6[ZH3
+R6
+31
+R7
+!i10b 1
+R8
+R56
+R57
+!i113 1
+R11
+R12
+Esubtractor3bit
+Z58 w1686959507
+R2
+R3
+!i122 8
+R0
+Z59 8C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Subtractor3Bit.vhd
+Z60 FC:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Subtractor3Bit.vhd
+l0
+L4 1
+VP^KMKMI;U@88^ihO_1zGC1
+!s100 =`YECWI8AGKD`fcS[Clo22
+R6
+31
+R7
+!i10b 1
+R8
+Z61 !s90 -reportprogress|300|-93|-work|work|C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Subtractor3Bit.vhd|
+Z62 !s107 C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Subtractor3Bit.vhd|
+!i113 1
+R11
+R12
+Abehavioral
+R2
+R3
+DEx4 work 14 subtractor3bit 0 22 P^KMKMI;U@88^ihO_1zGC1
+!i122 8
+l23
+L13 17
+Vm:AddnNh^W^2==GR=];LA2
+!s100 fMBzIX9RCGf9;JcYho[jm1
+R6
+31
+R7
+!i10b 1
+R8
+R61
+R62
+!i113 1
+R11
+R12

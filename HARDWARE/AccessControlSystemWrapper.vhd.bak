@@ -1,0 +1,66 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+ENTITY AccessControlSystemWrapper IS
+port(
+--Input ports
+		Lines: in std_logic_vector(3 downto 0);
+		Mclk		: in std_logic;
+		Reset		: in std_logic;
+		Pswitch	: in std_logic;
+--Output USBport
+		Columns	: out std_logic_vector(2 downto 0);
+		E 			: out std_logic;
+		RS 		: out std_logic;
+		D0_3		: out std_logic_VECTOR(3 downto 0);
+		Leds 		: out std_logic_VECTOR(5 downto 0)
+		
+);
+end AccessControlSystemWrapper;
+
+architecture structural of AccessControlSystemWrapper is
+
+component AccessControlSystem is
+port(
+--Input ports
+		Lines: in std_logic_vector(3 downto 0);
+		Mclk		: in std_logic;
+		Reset		: in std_logic;
+		Pswitch	: in std_logic;
+--Output USBport
+		Columns	: out std_logic_vector(2 downto 0);
+		E 			: out std_logic;
+		RS 		: out std_logic;
+		D0_3		: out std_logic_VECTOR(3 downto 0);
+		Leds 		: out std_logic_VECTOR(5 downto 0)
+);
+end component;
+
+component door_mecanism is
+port(
+--Input ports
+		MCLK 			: in std_logic;
+		RST			: in std_logic;
+		onOff			: in std_logic;
+		openClose	: in std_logic;
+		v				: in std_logic_vector(3 downto 0);
+		Pswitch		: in std_logic;
+--Output ports
+		Sopen			: out std_logic;
+		Sclose		: out std_logic;
+		Pdetector	: out std_logic;
+		HEX0			: out std_logic_vector(7 downto 0);
+		HEX1			: out std_logic_vector(7 downto 0);
+		HEX2			: out std_logic_vector(7 downto 0);
+		HEX3			: out std_logic_vector(7 downto 0);
+		HEX4			: out std_logic_vector(7 downto 0);
+		HEX5			: out std_logic_vector(7 downto 0)
+);
+end component;
+
+--begin
+--U0: AccessControlSystem port map(Lines => Lines, Mclk => Mclk, )
+
+--U1: door_mecanism port map(MCLK => Mclk, RST => Reset, onOff => onoff_signal, openClose => Door_out(0), 
+	--								v => Door_out(4 downto 1), Sclose => close_signal, Sopen => open_signal, 
+		--							Pdetector => detect_signal, Pswitch => Pswitch);

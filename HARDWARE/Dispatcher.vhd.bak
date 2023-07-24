@@ -1,0 +1,50 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Dispatcher is 
+Port(
+--Input ports
+     Dval		: in std_logic;
+	  Din			: in std_logic_vector(4 downto 0);
+--Output ports
+	  Wrl 	   : out std_logic;
+	  Dout		: out std_logic_vector(4 downto 0);
+	  done		: out std_logic
+);
+	  
+end Dispatcher;
+
+architecture behavioral of Dispatcher is
+
+type State is (No_deliver, Delivering, Deliver_done);
+
+signal CurrentState, NextState : State;
+
+begin
+CurrentState <= No_deliver when reset = '1' else NextState when rising_edge(clk);
+
+--Progress to next state
+GenerateNextState:
+process (Dval)
+	begin
+		case CurrentState is
+			when No_deliver	=> if (Dval = '1') then
+											wait for 500 ns;
+											NextState <= Delivering;
+										else
+											NextState <= No_deliver;
+										end if;
+										
+			when Delivering	=> wait for 500 ns;
+										NextState <= Deliver_done;
+										
+			when Deliver_done => NextState <= No_deliver;
+								
+		end case;
+	end process;
+	
+--Output values
+Wrl <= '1' when (CurrentState = Delivering) else '0';
+done <= '1' when (CurrentState = Deliver_done) else '0';
+
+end behavioral;

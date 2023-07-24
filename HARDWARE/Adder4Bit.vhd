@@ -1,0 +1,72 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Adder4Bit is
+    PORT(
+        A : in std_logic_vector(3 downto 0);
+        B : in std_logic_vector(3 downto 0);
+        Ci : in std_logic;
+        S : out std_logic_vector(3 downto 0);
+        Co : out std_logic
+    );
+end Adder4Bit;
+
+architecture structural of Adder4Bit is
+    component FA is
+        PORT(
+            A : in std_logic;
+            B : in std_logic;
+            Ci : in std_logic;
+            S : out std_logic;
+            Co : out std_logic
+        );
+    end component;
+
+    signal carry1, carry2, carry3 : std_logic;
+
+begin
+    U1 : FA port map(A => A(0), B => B(0), Ci => Ci, S => S(0), Co => carry1);
+    U2 : FA port map(A => A(1), B => B(1), Ci => carry1, S => S(1), Co => carry2);
+    U3 : FA port map(A => A(2), B => B(2), Ci => carry2, S => S(2), Co => carry3);
+    U4 : FA port map(A => A(3), B => B(3), Ci => carry3, S => S(3), Co => Co);
+
+end structural;
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Reg4Bit is
+    PORT(
+        D : in std_logic_vector(3 downto 0);
+        CLK : in std_logic;
+        RESET : in std_logic;
+        SET : in std_logic;
+        CE : in std_logic;
+        Q : out std_logic_vector(3 downto 0)
+    );
+end Reg4Bit;
+
+architecture structural of Reg4Bit is
+
+    component FFD is
+        PORT(
+            CLK : in std_logic;
+            RESET : in std_logic;
+            SET : in std_logic;
+            D : in std_logic;
+            EN : in std_logic;
+            Q : out std_logic
+        );
+    end component;
+
+    signal Qs : std_logic_vector(3 downto 0);
+
+begin
+
+    U0 : FFD port map(CLK => CLK, RESET => RESET, EN => CE, SET => SET, D => D(3), Q => Qs(3));
+    U1 : FFD port map(CLK => CLK, RESET => RESET, EN => CE, SET => SET, D => D(2), Q => Qs(2));
+    U2 : FFD port map(CLK => CLK, RESET => RESET, EN => CE, SET => SET, D => D(1), Q => Qs(1));
+    U3 : FFD port map(CLK => CLK, RESET => RESET, EN => CE, SET => SET, D => D(0), Q => Qs(0));
+
+    Q <= Qs;
+	 
+end structural;

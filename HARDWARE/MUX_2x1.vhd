@@ -1,0 +1,21 @@
+library ieee;
+use ieee.std_logic_1164.all;
+entity MUX_2x1 is
+port(
+--Input ports
+  X, Y: in std_logic_vector(3 downto 0);
+  S: in std_logic;
+  --Output ports
+  R: out std_logic_vector(3 downto 0)
+  );
+  end MUX_2x1;
+  
+architecture structural of MUX_2x1 is
+begin 
+ 
+  R(0) <= ((not S and X(0))  or (S and Y(0))) ;
+  R(1) <= ((not S and X(1))  or (S and Y(1))) ;
+  R(2) <= ((not S and X(2))  or (S and Y(2))) ;
+  R(3) <= ((not S and X(3))  or (S and Y(3))) ;
+
+ end structural;

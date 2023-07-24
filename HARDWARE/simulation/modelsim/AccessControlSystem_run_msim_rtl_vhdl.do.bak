@@ -1,0 +1,20 @@
+transcript on
+if {[file exists rtl_work]} {
+	vdel -lib rtl_work -all
+}
+vlib rtl_work
+vmap work rtl_work
+
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/Adder.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/HA.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/KeyScan.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/FFD.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/FA.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/KeyControl.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/CLKDIV.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/Counter.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/Decoder.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/REGIST.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/KeyDecode.vhd}
+vcom -93 -work work {C:/Users/ADMIN/OneDrive/Documentos/LIC/PENC.vhd}
+

@@ -1,0 +1,35 @@
+
+
+
+
+
+set_location_assignment PIN_P11 -to Mclk
+
+
+set_location_assignment PIN_C10 -to Reset
+set_location_assignment PIN_C11 -to Sclose
+set_location_assignment PIN_D12 -to Sopen
+set_location_assignment PIN_C12 -to Psensor
+
+
+
+
+set_location_assignment PIN_A8 	-to Leds[0]
+set_location_assignment PIN_A9 	-to Leds[1]
+set_location_assignment PIN_A10 -to Leds[2]
+set_location_assignment PIN_B10 -to Leds[3]
+set_location_assignment PIN_D13 -to Leds[4]
+set_location_assignment PIN_C13 -to Leds[5]
+
+
+set_location_assignment PIN_W5     -to Lines[0]
+set_location_assignment PIN_AA14   -to	Lines[1]
+set_location_assignment PIN_W12    -to Lines[2]
+set_location_assignment PIN_AB12   -to	Lines[3]
+set_location_assignment PIN_AB11   -to	Columns[0]
+set_location_assignment PIN_AB10   -to	Columns[1]
+set_location_assignment PIN_AA9    -to	Columns[2]
+#set_location_assignment PIN_AA8    -to	Columns[3]
+
+
+

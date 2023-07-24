@@ -1,0 +1,24 @@
+
+
+
+
+
+set_location_assignment PIN_P11 -to Mclk
+
+
+set_location_assignment PIN_C10 -to Reset
+set_location_assignment PIN_C11 -to accept
+
+
+set_location_assignment PIN_A8 	-to RSD0_3[0]
+set_location_assignment PIN_A9 	-to RSD0_3[1]
+set_location_assignment PIN_A10 -to RSD0_3[2]
+set_location_assignment PIN_B10 -to RSD0_3[3]
+set_location_assignment PIN_D13 -to RSD0_3[4]
+set_location_assignment PIN_C13 -to Wrl
+
+
+
+
+
+

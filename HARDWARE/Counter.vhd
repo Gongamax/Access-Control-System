@@ -1,0 +1,47 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity Counter is
+PORT(-- Input ports
+      CE : in std_logic;
+		CLK : in std_logic;
+		RESET: in std_logic;
+	  -- Output ports
+		Q: out std_logic_vector (1 downto 0));
+
+end Counter;
+architecture structural of Counter is
+
+component Adder is
+PORT( -- Input ports
+		A  : in std_logic_vector(1 downto 0);
+		B  : in std_logic_vector(1 downto 0);
+		Ci : in std_logic;
+		-- Output ports
+		S  : out std_logic_vector(1 downto 0);
+		Co : out std_logic);
+end component;
+
+  
+component REGIST is
+PORT(-- Intput ports
+        D:in std_logic_vector(1 downto 0);
+        CLK: in std_logic;
+        RESET: in std_logic;
+        SET: in std_logic;
+        CE: in std_logic;
+      -- Output ports
+        Q: out std_logic_vector(1 downto 0));
+end component;
+
+signal CEx: std_logic; -- sinal da entrada do adder Cex - CE 
+signal Sx: std_logic_vector(1 downto 0); -- sinal de saida para o adder - regist  S - Sx -D 
+signal Q1: std_logic_vector(1 downto 0);
+--signal SCin,SCout: std_logic;
+
+begin
+U0: ADDER port map ( A => Q1, B => "01", Ci =>'0', S => Sx, Co => open );
+U1: REGIST port map (CLK => CLK, RESET=>RESET, CE=> CE , D => Sx, Q=> Q1 , SET=>'0');
+Q<=Q1;
+
+end structural;

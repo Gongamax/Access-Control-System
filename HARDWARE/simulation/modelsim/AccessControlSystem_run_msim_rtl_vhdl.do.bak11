@@ -1,0 +1,54 @@
+transcript on
+if {[file exists rtl_work]} {
+	vdel -lib rtl_work -all
+}
+vlib rtl_work
+vmap work rtl_work
+
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Adder.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/HA.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/KeyScan.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MUX.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FFD.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FA.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/KeyControl.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/CLKDIV.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Counter.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Decoder.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/REGIST.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/KeyDecode.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/UsbPort.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/KeyBoardReader.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/AccessControlSystem.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/PENC.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/shift_register.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/SerialControl.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Counter3bits.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/SerialReceiver.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Reg3Bit.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Adder3Bit.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Dispatcher.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/LCDdispatcher.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/SLCDC.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/DoorController.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/SDC.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/adder_rc.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/counter_pl.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/door_emulation_seg.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/door_mecanism.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/full_adder.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/register_D_E_R_value.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/ShiftRegister_lr.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/RingBufferControl.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Adder4Bit.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Counter4Bit.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/BufferControl.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/RAM.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/RingBuffer.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MUX_2x1.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/OutputBuffer.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/OutputRegister.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/AccessControlSystemWrapper.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MACTESTE.vhd}
+vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Subtractor3Bit.vhd}
+

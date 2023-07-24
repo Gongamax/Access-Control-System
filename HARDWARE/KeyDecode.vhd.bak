@@ -1,0 +1,52 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity KeyDecode is
+port(
+--Input Ports
+		Kack		: in std_logic;
+		InMux		: in std_logic_vector(3 downto 0);
+--Output Ports
+		Kval		: out std_logic;
+		K0_3		: out std_logic_vector(3 downto 0)
+);
+end KeyDecode;
+
+architecture structural of KeyDecode is
+
+component KeyScan is
+port(
+--Input ports
+		Kscan  	: in std_logic;
+		Mclk    	: in std_logic;
+		Reset    : in std_logic;
+		InMux    : in std_logic_vector( 3 downto 0); -- INPUT para mux  LINHAS
+--Output ports 
+		K0_3 	 	: out std_logic_vector(3 downto 0);
+    	Kpress 	: out std_logic;
+		OutDec   : out std_logic_vector(2 downto 0) -- OUTPUT para DEC  COLUNAS
+);
+end component;
+
+component KeyControl is
+port(
+--Input ports
+		reset		: in std_logic;
+		clk		: in std_logic;
+		Kack		: in std_logic;
+		Kpress	: in std_logic;
+--Output ports
+		Kval		: out std_logic;
+		Kscan		: out std_logic
+);
+end component;
+
+--Signals
+signal Kpress	: std_logic;
+signal Kscan	: std_logic;
+
+begin
+U0: KeyScan port map (Kscan => Kscan, Kpress => Kpress);
+U1: KeyControl port map (Kpress => Kpress);
+
+end structural;

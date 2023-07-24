@@ -1,0 +1,151 @@
+# Reading pref.tcl
+# ERROR: No extended dataflow license exists
+# do AccessControlSystem_run_msim_rtl_vhdl.do
+# if {[file exists rtl_work]} {
+# 	vdel -lib rtl_work -all
+# }
+# vlib rtl_work
+# vmap work rtl_work
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap work rtl_work 
+# Copying C:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# 
+# vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/HA.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:19:24 on Jun 24,2023
+# vcom -reportprogress 300 -93 -work work C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/HA.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity HA
+# -- Compiling architecture structural of HA
+# End time: 14:19:24 on Jun 24,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MUX.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:19:24 on Jun 24,2023
+# vcom -reportprogress 300 -93 -work work C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MUX.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MUX
+# -- Compiling architecture behavioral of MUX
+# End time: 14:19:24 on Jun 24,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FFD.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:19:24 on Jun 24,2023
+# vcom -reportprogress 300 -93 -work work C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FFD.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity FFD
+# -- Compiling architecture logicFunction of FFD
+# End time: 14:19:24 on Jun 24,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FA.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:19:24 on Jun 24,2023
+# vcom -reportprogress 300 -93 -work work C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/FA.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity FA
+# -- Compiling architecture structural of FA
+# End time: 14:19:24 on Jun 24,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Counter3bits.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:19:24 on Jun 24,2023
+# vcom -reportprogress 300 -93 -work work C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Counter3bits.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity Counter3Bit
+# -- Compiling architecture structural of Counter3Bit
+# End time: 14:19:24 on Jun 24,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Reg3Bit.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:19:24 on Jun 24,2023
+# vcom -reportprogress 300 -93 -work work C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Reg3Bit.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity Reg3Bit
+# -- Compiling architecture structural of Reg3Bit
+# End time: 14:19:24 on Jun 24,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Adder3Bit.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:19:24 on Jun 24,2023
+# vcom -reportprogress 300 -93 -work work C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Adder3Bit.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity Adder3Bit
+# -- Compiling architecture structural of Adder3Bit
+# End time: 14:19:24 on Jun 24,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MAC.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:19:24 on Jun 24,2023
+# vcom -reportprogress 300 -93 -work work C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/MAC.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity MAC
+# -- Compiling architecture structural of MAC
+# End time: 14:19:24 on Jun 24,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vcom -93 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Subtractor3Bit.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:19:24 on Jun 24,2023
+# vcom -reportprogress 300 -93 -work work C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Subtractor3Bit.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity Subtractor3Bit
+# -- Compiling architecture Behavioral of Subtractor3Bit
+# End time: 14:19:24 on Jun 24,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+vcom -reportprogress 300 -work work {C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Test_Bench/MAC_TB.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 14:19:42 on Jun 24,2023
+# vcom -reportprogress 300 -work work C:/Users/Francisco Saraiva/Desktop/4 Semestre/LIC/PROJETO_DESENVOLVIMENTO/HARDWARE/Test_Bench/MAC_TB.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity MAC_TB
+# -- Compiling architecture behavioral of MAC_TB
+# End time: 14:19:42 on Jun 24,2023, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vsim work.mac_tb
+# vsim work.mac_tb 
+# Start time: 14:19:46 on Jun 24,2023
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.mac_tb(behavioral)
+# Loading work.mac(structural)
+# Loading work.counter3bit(structural)
+# Loading work.adder3bit(structural)
+# Loading work.fa(structural)
+# Loading work.ha(structural)
+# Loading work.reg3bit(structural)
+# Loading work.ffd(logicfunction)
+# Loading work.mux(behavioral)
+# Loading work.subtractor3bit(behavioral)
+add wave -position insertpoint sim:/mac_tb/*
+run
+run
+run
+run
+run
+run
+# End time: 15:15:55 on Jun 24,2023, Elapsed time: 0:56:09
+# Errors: 0, Warnings: 0

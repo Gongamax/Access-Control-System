@@ -1,0 +1,34 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity KeyReader is
+port(
+--Input ports
+		Ack : in std_logic;
+		InMux : in std_logic_vector(3 downto 0);
+--Output ports
+		K0_3 : out std_logic_vector(3 downto 0);
+		Kval : out std_logic
+);
+end KeyReader;
+
+architecture structural of KeyReader is
+
+component KeyDecode is
+port(
+--Input ports
+		Kack		: in std_logic;
+		InMux		: in std_logic_vector(3 downto 0);
+--Output ports
+		Kval		: out std_logic;
+		K0_3		: out std_logic_vector(3 downto 0)
+);
+end component;
+
+--Signals
+
+
+begin 
+U0: KeyDecode port map(Kack => Ack, InMux => InMux, K0_3 => K0_3, Kval => Kval);
+
+end structural;

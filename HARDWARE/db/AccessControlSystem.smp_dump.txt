@@ -1,0 +1,51 @@
+
+State Machine - |AccessControlSystemWrapper|AccessControlSystem:U0|SDC:U2|DoorController:U1|CurrentState
+Name CurrentState.state_bit_1 CurrentState.state_bit_0 
+CurrentState.Received 0 0 
+CurrentState.Open_door 0 1 
+CurrentState.Close_door 1 1 
+CurrentState.isDone 1 0 
+
+State Machine - |AccessControlSystemWrapper|AccessControlSystem:U0|SDC:U2|SerialReceiver:UO|SerialControl:U2|CurrentState
+Name CurrentState.state_bit_1 CurrentState.state_bit_0 
+CurrentState.Not_started 0 0 
+CurrentState.Shift_Register_starts 0 1 
+CurrentState.Valid_plot 1 1 
+CurrentState.Final_state 1 0 
+
+State Machine - |AccessControlSystemWrapper|AccessControlSystem:U0|SLCDC:U1|LCDdispatcher:U1|Dispatcher:U1|CurrentState
+Name CurrentState.state_bit_1 CurrentState.state_bit_0 
+CurrentState.No_deliver 0 0 
+CurrentState.Delivering 0 1 
+CurrentState.Deliver_done 1 1 
+
+State Machine - |AccessControlSystemWrapper|AccessControlSystem:U0|SLCDC:U1|SerialReceiver:UO|SerialControl:U2|CurrentState
+Name CurrentState.state_bit_1 CurrentState.state_bit_0 
+CurrentState.Not_started 0 0 
+CurrentState.Shift_Register_starts 0 1 
+CurrentState.Valid_plot 1 1 
+CurrentState.Final_state 1 0 
+
+State Machine - |AccessControlSystemWrapper|AccessControlSystem:U0|KeyBoardReader:U0|OutputBuffer:U2|BufferControl:U1|CurrentState
+Name CurrentState.state_bit_1 CurrentState.state_bit_0 
+CurrentState.Start 0 0 
+CurrentState.Wreg_1 0 1 
+CurrentState.Store_data 1 1 
+CurrentState.Finish 1 0 
+
+State Machine - |AccessControlSystemWrapper|AccessControlSystem:U0|KeyBoardReader:U0|RingBuffer:U1|RingBufferControl:U0|CurrentState
+Name CurrentState.state_bit_2 CurrentState.state_bit_1 CurrentState.state_bit_0 
+CurrentState.Start 0 0 0 
+CurrentState.Write_memory 0 0 1 
+CurrentState.Write_done 0 1 1 
+CurrentState.IncrPut 0 1 0 
+CurrentState.Finish_write 1 1 0 
+CurrentState.Attend_output 1 1 1 
+CurrentState.Output_done 1 0 1 
+
+State Machine - |AccessControlSystemWrapper|AccessControlSystem:U0|KeyBoardReader:U0|KeyDecode:U0|KeyControl:U2|CurrentState
+Name CurrentState.state_bit_1 CurrentState.state_bit_0 
+CurrentState.Scanning 0 0 
+CurrentState.RegisterDeliver 0 1 
+CurrentState.Kval_true 1 1 
+CurrentState.Kval_false 1 0 

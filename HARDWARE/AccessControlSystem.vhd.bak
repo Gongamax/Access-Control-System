@@ -1,0 +1,49 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity AccessControlSystem is
+port(
+--Output USBport
+		outUSB : std_logic;
+);
+end AccessControlSystem;
+
+architecture structural of AccessControlSystem is
+
+component KeyBoardReader is
+port(
+--Input ports
+		Mclk    	: in std_logic;
+		Reset    : in std_logic;
+		Kack		: in std_logic;
+		Lines		: in std_logic_vector(3 downto 0); -- LINHAS 
+--Output ports
+		Kval		: out std_logic;
+		K0_3		: out std_logic_vector(3 downto 0);
+		Columns  : out std_logic_vector(2 downto 0) -- Colunas;
+);
+end component;
+
+component UsbPort is
+port(
+--Input port
+	inputPort  :  in std_logic_vector(7 DOWNTO 0);
+--Output port
+	outputPort :  out std_logic_vector(7 DOWNTO 0)
+); 
+end component;
+
+--Signals
+signal ack_s : std_logic;
+signal in_usb(0) : std_logic;
+signal in_usb(1) : std_logic;
+signal in_usb(2) : std_logic;
+signal in_usb(3) : std_logic;
+signal in_usb(4) : std_logic;
+
+begin		
+U0: KeyBoardReader port map(Mclk => Mclk, Reset => Reset, Kack=> ack_s, K0_3(0) => in_usb(0), K0_3(1) => in_usb(1),
+									K0_3(2) => in_usb(2), K0_3(3) => in_usb(3), Kval => in_usb(4));
+U1: UsbPort port map(inputPort(0) => in_usb(0), inputPort(1) => in_usb(1), inputPort(2) => in_usb(2),
+							inputPort(3) => in_usb(3), inputPort(4) => in_usb(4), outputPort(7) => ack_s);
+end structural;

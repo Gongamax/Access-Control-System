@@ -1,0 +1,51 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity LCDdispatcher is
+port(
+--Input ports
+		Dval		: in std_logic;
+		Din	 	: in std_logic_vector(4 downto );
+		clk 		: in std_logic;
+		reset	: in std_logic;
+--Output ports
+		Wrl 	   : out std_logic;
+	   Dout		: out std_logic_vector(4 downto 0);
+	   done		: out std_logic
+);
+end LCDdispatcher;
+
+architecture structural of LCDdispatcher is
+
+component CLKDIV is
+PORT(
+--Input ports
+		clk_in: in std_logic;
+--Output ports
+		clk_out: out std_logic
+);
+end component;
+
+component Dispatcher is
+Port(
+--Input ports
+     Dval		: in std_logic;
+	  Din			: in std_logic_vector(4 downto 0);
+	  clk			: in std_logic;
+	  reset		: in std_logic;
+--Output ports
+	  Wrl 	   : out std_logic;
+	  Dout		: out std_logic_vector(4 downto 0);
+	  done		: out std_logic
+);
+end component;
+
+--signals
+signal clk_signal : std_logic;
+
+begin
+UO: CLKDIV port map(clk_in => clk, clk_out => clk_signal);
+U1: Dispatcher port map(Dval => Dval, Din => Din, clk => clk_signal, reset => reset);
+
+end structural; 
+  
